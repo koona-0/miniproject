@@ -11,21 +11,17 @@
 		<cr:forEach var="mcdata" items="${mcList}">
 			<div class="md_estates">
 				<ul>
-					<li>
-						<div onclick="gochoice(${mcdata.choice_url})">
-							<img src="./md_room/${mcdata.choice_image}">
-						</div> <span>${mcdata.choice_title} </span>
-						<div>${mcdata.choice_description}</div>
+					<a href="${mcdata.choice_url}">
+						<li>
+							<div>
+								<img src="./md_room/${mcdata.choice_image}">
+							</div> <span>${mcdata.choice_title} </span>
+							<div>${mcdata.choice_description}</div>
 					</li>
+					</a>
 				</ul>
 			</div>
 		</cr:forEach>
 
 	</div>
 </section>
-
-<script>
-function gochoice(url){
-	location.href(url);
-}
-</script>

@@ -23,7 +23,7 @@ public class main_controller {
 	public String weekinfo(Model m) {
 		List<apartment_DTO> aptList = this.dao.apartment_select();
 		m.addAttribute("aptList", aptList);
-		System.out.println(aptList);
+//		System.out.println(aptList);
 		return null;
 	}
 	

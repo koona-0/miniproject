@@ -9,7 +9,9 @@
  <nav>
   <div class="menus">
     <ul class="menus_ul">
-      <li><img src="./logo/e_click_logo.png"></li>
+      <li >
+      <img src="./logo/e_click_logo.png" onclick="location.href='./index.do'">
+      </li>
       <li>일반매물</li>
       <li>추천매물</li>
       <li>중계의뢰</li>
@@ -20,8 +22,10 @@
         <!--
         홍길동님 환영합니다.[로그아웃]
         -->
-        <span title="로그인"><img src="./ico/login.svg"></span>
-        <span title="회원가입"><img src="./ico/membership.svg"></span>
+        <span title="로그인" onclick="location.href='./login.jsp'">
+        <img src="./ico/login.svg">
+        </span>     
+        <span title="회원가입"><img src="./ico/membership.svg"></span>        
       </li>
     </ul>
   </div>
