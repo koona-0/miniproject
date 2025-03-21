@@ -18,6 +18,14 @@ public class main_controller {
 	public String index(Model m) {
 		return null;
 	}
+	
+	@GetMapping("/mdchoice.do")
+	public String mdchoice(Model m) {
+		List<mdchoice_DTO> mcList = this.dao.mdchoice_select();
+		m.addAttribute("mcList", mcList);
+//		System.out.println(mcList);
+		return null;
+	}
 
 	@GetMapping("/copyright.do")
 	public String copyright(Model m) {

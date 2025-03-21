@@ -4,8 +4,8 @@
 
 <mapper namespace="miniproject.index_mapper">
 
-<select id="mdchoice_select" resultType="">
-select * from web_info
+<select id="mdchoice_select" resultType="mdchoicedto">
+select * from md_choice
 </select>
 
 <select id="copyright_select" resultType="copyrightdto">

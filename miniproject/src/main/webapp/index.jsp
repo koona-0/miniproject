@@ -24,7 +24,7 @@
 		<cr:import url="./weekinfo.jsp"></cr:import>
 
 		<!-- 추천 분양 정보 -->
-		<cr:import url="./mdchoice.jsp"></cr:import>
+		<cr:import url="./mdchoice.do"></cr:import>
 	</main>
 
 	<!-- 카피라이터 -->
