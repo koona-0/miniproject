@@ -19,11 +19,18 @@ public class main_controller {
 		return null;
 	}
 	
+	@GetMapping("/weekinfo.do")
+	public String weekinfo(Model m) {
+		List<apartment_DTO> aptList = this.dao.apartment_select();
+		m.addAttribute("aptList", aptList);
+		System.out.println(aptList);
+		return null;
+	}
+	
 	@GetMapping("/mdchoice.do")
 	public String mdchoice(Model m) {
 		List<mdchoice_DTO> mcList = this.dao.mdchoice_select();
 		m.addAttribute("mcList", mcList);
-//		System.out.println(mcList);
 		return null;
 	}
 

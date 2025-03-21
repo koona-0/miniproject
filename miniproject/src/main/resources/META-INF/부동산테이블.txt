@@ -1,0 +1,39 @@
+CREATE TABLE apartment_info (
+    aidx INT AUTO_INCREMENT COMMENT '자동 증가값',
+    aptnm VARCHAR(100) NOT NULL COMMENT '아파트명',
+    addr VARCHAR(255) NOT NULL COMMENT '주소',
+    apt_type VARCHAR(50) NOT NULL COMMENT '아파트 종류',
+    rent_type VARCHAR(50) NOT NULL COMMENT '임대 형태',
+    sale_date VARCHAR(20) NOT NULL COMMENT '분양일자',
+    move_date VARCHAR(20) NOT NULL COMMENT '입주일자',
+    img VARCHAR(255) COMMENT '이미지 파일명',
+    heat VARCHAR(100) COMMENT '난방 구조',
+    units INT NOT NULL COMMENT '세대 수',
+    buildings INT NOT NULL COMMENT '건물 동 수',
+    builder VARCHAR(100) COMMENT '건설사',
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
+    PRIMARY KEY (aidx)
+) COMMENT='아파트 정보 테이블';
+
+CREATE TABLE md_choice (
+    choice_idx INT AUTO_INCREMENT COMMENT '기본 키',
+    choice_title VARCHAR(255) NOT NULL COMMENT '제목',
+    choice_description TEXT NOT NULL COMMENT '상세 내용',
+    choice_image VARCHAR(255) NOT NULL COMMENT '이미지 URL',
+    choice_url TEXT NOT NULL COMMENT '링크 주소',
+	choice_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
+    PRIMARY KEY (choice_idx)
+);
+
+CREATE TABLE web_info (
+    idx INT AUTO_INCREMENT COMMENT '기본 키',
+    corp_name VARCHAR(255) NOT NULL COMMENT '회사명',
+    ceo VARCHAR(100) NOT NULL COMMENT '대표',
+    corp_addr VARCHAR(255) NOT NULL COMMENT '주소',
+    biz_no VARCHAR(50) NOT NULL COMMENT '사업자번호',
+    sales_no VARCHAR(100) NOT NULL COMMENT '통신판매업',
+    sec_mgr VARCHAR(100) NOT NULL COMMENT '정보보호책임자',
+    tel VARCHAR(50) NOT NULL COMMENT '전화번호',
+    fax VARCHAR(50) NOT NULL COMMENT '팩스번호',
+    PRIMARY KEY (idx)
+);

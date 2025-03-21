@@ -21,7 +21,7 @@
 		<cr:import url="./quickmenu.jsp"></cr:import>
 
 		<!-- 금주 분양 매물 정보 -->
-		<cr:import url="./weekinfo.jsp"></cr:import>
+		<cr:import url="./weekinfo.do"></cr:import>
 
 		<!-- 추천 분양 정보 -->
 		<cr:import url="./mdchoice.do"></cr:import>

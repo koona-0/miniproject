@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="miniproject.index_mapper">
 
-<select id="mdchoice_select" resultType="mdchoicedto">
-select * from md_choice
-</select>
+	<select id="apartment_select" resultType="apartmentdto">
+		select * from apartment_info
+	</select>
 
-<select id="copyright_select" resultType="copyrightdto">
-select * from web_info
-</select>
+	<select id="mdchoice_select" resultType="mdchoicedto">
+		select * from md_choice
+	</select>
+
+	<select id="copyright_select" resultType="copyrightdto">
+		select * from web_info
+	</select>
 
 </mapper>
+
