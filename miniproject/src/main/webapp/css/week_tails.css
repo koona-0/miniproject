@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+.weektails {
+	font-family: 'Noto Sans KR';
+  	font-size: 28px;
+	width: 850px;
+	margin: 0 auto;
+}
+.weektails p {
+	height: 70px;
+	line-height: 70px;
+  	font-weight: 500;
+}
+.weektails > div {
+	width: 850px;
+	height: auto;
+	margin: 0 auto;
+}
+.weektails > div > p {
+	font-weight: 400;
+	border-bottom: 1px solid #333333;
+}
+.weektails > div > ul {
+	width: 100%;
+	height: 640px;
+	font-size: 14px;
+}
+.weektails > div > ul > li {
+	height: 40px;
+	padding-left: 10px;
+	float: left;
+	line-height: 40px;
+	border-bottom: 1px solid #666666;
+}
+.weektails > div > ul > li:nth-of-type(odd) {
+	width: 180px;
+	background: #ccc;
+}
+.weektails > div > ul > li:nth-of-type(even) {
+	width: 670px;
+}
+.weektails > div > ul > li:nth-of-type(13), .weektails > div > ul > li:nth-of-type(14) {
+	height: 400px;
+	line-height: 400px;
+}
+.weektails > div > ul > li:nth-of-type(14) img {
+	width: 380px;
+	height: 380px;
+	padding-top: 10px;
+}

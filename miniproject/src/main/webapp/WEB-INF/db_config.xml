@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:cache="http://www.springframework.org/schema/cache"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xmlns:mybatis-spring="http://www.springframework.org/schema/mybatis-spring"
+   xmlns:util="http://www.springframework.org/schema/util"
+   
+   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd                   
+                  http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd                   
+                  http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+                  http://www.springframework.org/schema/cache https://www.springframework.org/schema/cache/spring-cache.xsd
+                  http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                  http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
+                  http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring.xsd
+                  ">
+
+	<!-- DB접속 정보 활성화하는 XML -->
+	<context:annotation-config/>
+	
+	<!-- Connection 데이터베이스 정보 -->
+	<bean id="dbinfo" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+	<property name="url" value="jdbc:mysql://localhost:3306/mini"/>
+	<property name="username" value="koona"/>
+	<property name="password" value="940"/>
+	</bean>
+	
+	<!-- Mybatis 구조의 DB 활용 -->
+	<bean id="sqlfact" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dbinfo"/>	<!-- 위에서 상속받음 -->
+	<property name="configLocation" value="classpath:/META-INF/config.xml"/>
+	<property name="mapperLocations" value="classpath:/META-INF/mapper.xml"/>
+	</bean>
+	
+	<!-- Mybatis Template (interface가 되어버림) -->
+	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="close">
+	<constructor-arg name="sqlSessionFactory" ref="sqlfact"/>
+	</bean>
+	
+</beans>
