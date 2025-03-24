@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<form id="f" method="post" action="./loginok.do">
 <aside class="login_pg">
 	<p>이메일로 시작하기</p>
 	<div>
-		<input type="text" name="lemail" placeholder="이메일 주소">
+		<input type="text" name="memail" placeholder="이메일 주소">
 	</div>
 	<div>
-		<input type="password" name="lpass" placeholder="비밀번호">
+		<input type="password" name="mpw" placeholder="비밀번호">
 	</div>
 	<div>
-		<input type="button" value="로그인" onclick="login.logincheck()">
+		<input type="button" value="로그인" onclick="login_btn()">
 	</div>
 	<div>
-		<span>이메일 찾기</span> <span>비밀번호 찾기</span>
+		<span onclick="location.href='./email_search.jsp'" style="cursor: pointer;">이메일 찾기</span> <span>비밀번호 찾기</span>
 	</div>
 </aside>
+</form>
+<script src="./js/login.js?v=1"></script>

@@ -7,6 +7,6 @@
 <typeAlias alias="apartmentdto" type="miniproject.apartment_DTO"/>
 <typeAlias alias="mdchoicedto" type="miniproject.mdchoice_DTO"/>
 <typeAlias alias="copyrightdto" type="miniproject.copyright_DTO"/>
-
+<typeAlias alias="memberdto" type="miniproject.member_DTO"/>
 </typeAliases>
 </configuration>

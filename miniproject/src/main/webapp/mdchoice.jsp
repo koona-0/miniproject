@@ -8,9 +8,9 @@
 			추천분양정보<br> <em>실시간 추천 분양정보를 한곳에!</em>
 		</p>
 
-		<cr:forEach var="mcdata" items="${mcList}">
-			<div class="md_estates">
-				<ul>
+		<div class="md_estates">
+			<ul>
+				<cr:forEach var="mcdata" items="${mcList}">
 					<a href="${mcdata.choice_url}">
 						<li>
 							<div>
@@ -19,9 +19,9 @@
 							<div>${mcdata.choice_description}</div>
 					</li>
 					</a>
-				</ul>
-			</div>
-		</cr:forEach>
+				</cr:forEach>
+			</ul>
+		</div>
 
 	</div>
 </section>

@@ -3,16 +3,43 @@
 
 <mapper namespace="miniproject.index_mapper">
 
+	<!-- index 페이지 -->
 	<select id="apartment_select" resultType="apartmentdto">
-		select * from apartment_info
+		select * from
+		apartment_info order by aidx desc
 	</select>
 
 	<select id="mdchoice_select" resultType="mdchoicedto">
 		select * from md_choice
+		order by choice_idx desc
 	</select>
 
 	<select id="copyright_select" resultType="copyrightdto">
 		select * from web_info
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="member_insert">
+		insert into member (midx, memail, mpw, mname, mtel, over14_agree,
+		terms_agree, privacy_agree, marketing_agree, join_date)
+		values ('0', #{memail}, #{mpw}, #{mname}, #{mtel}, #{over14_agree},
+		#{terms_agree}, #{privacy_agree}, #{marketing_agree}, now())
+	</insert>
+
+	<!-- 이메일중복체크 -->
+	<select id="memail_select" resultType="int">
+		select count(*) as ctn from member
+		where memail= #{memail}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login_select" resultType="memberdto">
+		select * from member where memail= #{memail} and mpw= #{mpw}
+	</select>
+	
+	<!-- 이메일 찾기 -->
+	<select id="esearch_select" resultType="String">
+		select memail from member where mname= #{mname} and mtel= #{mtel}
 	</select>
 
 </mapper>

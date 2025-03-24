@@ -1,0 +1,17 @@
+CREATE TABLE member (
+    midx INT AUTO_INCREMENT COMMENT '자동 증가값',
+    memail VARCHAR(255) NOT NULL COMMENT '이메일',
+    mpw VARCHAR(255) NOT NULL COMMENT '비밀번호',
+    mname VARCHAR(100) NOT NULL COMMENT '이름',
+    mtel VARCHAR(15) NOT NULL COMMENT '휴대폰번호',
+    over14_agree ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '14세 이상 여부',
+    terms_agree ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '이용약관 동의',
+    privacy_agree ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '개인정보수집 동의',
+    marketing_agree ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '마케팅수신동의',
+    join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '가입 날짜',
+    PRIMARY KEY (midx),
+    UNIQUE (memail),
+    UNIQUE (mtel)
+);
+
+select * from member;

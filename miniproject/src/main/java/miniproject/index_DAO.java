@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("index_DAO")
 public class index_DAO {
-	
+
 	@Resource(name = "template")
 	public SqlSessionTemplate st;
 
@@ -22,10 +22,32 @@ public class index_DAO {
 		List<mdchoice_DTO> mcList = this.st.selectList("mdchoice_select");
 		return mcList;
 	}
-	
+
 	public List<copyright_DTO> copyright_select() {
 		List<copyright_DTO> crList = this.st.selectList("copyright_select");
 		return crList;
 	}
-	
+
+	// 회원가입
+	public int member_insert(member_DTO dto) {
+		int result = this.st.insert("member_insert", dto);
+		return result;
+	}
+
+	// 이메일 중복체크
+	public int memail_select(String memail) {
+		int result = this.st.selectOne("memail_select", memail);
+		return result;
+	}
+
+	// 로그인
+	member_DTO login_select(member_DTO dto) {
+		member_DTO mdata = this.st.selectOne("login_select", dto);
+		return mdata;
+	}
+	String esearch_select(member_DTO dto) {
+		String mail = this.st.selectOne("esearch_select", dto);
+		return mail;
+	}
+
 }
