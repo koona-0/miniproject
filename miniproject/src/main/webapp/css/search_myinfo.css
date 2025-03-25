@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.sub {
+	font-family: 'Noto Sans KR';
+	font-size: 15px;
+	font-weight: 400;
+	width: 700px;
+	height:500px !important;
+	margin: 0 auto;
+	position:relative;
+	left:30px;
+}
+
+.sub > div {
+	line-height:70px;
+	margin-top:70px;
+}
+
+.sub > div > ul > li{
+	width:600px;
+	height:70px;
+	margin-top:30px;
+	margin-bottom:60px;
+    font-size:28px;
+    font-weight:500;
+    color:#1d1d1d;
+    border-bottom:2px solid #1d1d1d;
+    text-align:center;
+}
+.repass > div{
+	background: url(../ico/password.svg) no-repeat 550px 25px / 24px 24px;
+}
+input::-ms-reveal,
+input::-ms-clear {
+    display : none;
+}
+.passin {
+    width: 600px;
+	height: 50px;
+	background-color: transparent;
+	border: 1px solid #ccc;
+    text-indent: 10px;
+}
+.search_submit {
+	font-size:15px;
+	font-weight:400px;
+	color:#fff;
+	border:0;
+	background-color: #ff6600;
+	width:600px;
+	height:50px;
+	position:relative;
+	bottom:70px;
+}

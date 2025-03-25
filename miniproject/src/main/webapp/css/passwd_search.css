@@ -1,26 +1,26 @@
 @charset "UTF-8";
 
-form {
+.sub {
 	font-family: 'Noto Sans KR';
 	font-size: 15px;
 	font-weight: 400;
 	width: 700px;
-	height:500px;
+	height:500px !important;
 	margin: 0 auto;
 	position:relative;
 	left:30px;
 }
 
-form > div {
+.sub > div {
 	line-height:70px;
 	margin-top:70px;
 }
 
-form > div > ul {
+.sub > div > ul {
 	line-height:70px;
 }
 
-form > div > ul > li{
+.sub > div > ul > li{
 	float:left;
 	width:300px;
 	height:70px;
@@ -28,7 +28,7 @@ form > div > ul > li{
 	margin-bottom:30px;
 }
 
-form > div > ul > li:first-child{
+.sub > div > ul > li:first-child{
 	font-size:28px;
 	font-weight:500;
 	color:#999999;
@@ -36,7 +36,7 @@ form > div > ul > li:first-child{
 	text-align:center;
 }
 
-form > div > ul > li:last-child{
+.sub > div > ul > li:last-child{
    font-size:28px;
    font-weight:500;
    color:#1d1d1d;
@@ -46,28 +46,29 @@ form > div > ul > li:last-child{
 
 
 
-form > .text1 > div:nth-of-type(1){
-	background: url(../ico/person.svg) no-repeat 560px 155px / 24px 24px;
+.sub > .text1 > div:nth-of-type(1){
+	background: url(../ico/email.svg) no-repeat 560px 155px / 24px 24px;
 
 }
 
-form > .text1 > div:nth-of-type(2){
+.sub > .text1 > div:nth-of-type(2){
 	background: url(../ico/hp.svg) no-repeat 560px 25px / 24px 24px;
 }
 
-form > .text1 > div > input[type="text"]{
+.sub > .text1 > div > input[type="text"]{
 	width:600px;
 	height:50px;
 	background:transparent;
 	border:1px solid #ccc;
+	text-indent: 10px;
 }
 
-form > div > input[type="button"]{
+.sub > div > input[type="button"]{
 	font-size:15px;
 	font-weight:400px;
 	color:#fff;
+	border:0;
 	background-color: #ff6600;
-	border-color:  #ff6600;
 	width:600px;
 	height:50px;
 	position:relative;

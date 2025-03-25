@@ -13,11 +13,15 @@ public interface index_mapper {
 	List<copyright_DTO> copyright_select();
 
 	public int member_insert(member_DTO dto);
-	
+
 	public int memail_select(String memail);
+
+	public member_DTO login_select(member_DTO dto);
+
+	public String esearch_select(member_DTO dto);
+
+	public String pwsearch_select(String memail, String mtel);
 	
-	member_DTO login_select(member_DTO dto);
-	
-	String esearch_select(member_DTO dto);
+	public int pw_update(String mpw, String memail);
 
 }

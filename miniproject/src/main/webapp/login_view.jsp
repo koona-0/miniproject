@@ -14,7 +14,8 @@
 		<input type="button" value="로그인" onclick="login_btn()">
 	</div>
 	<div>
-		<span onclick="location.href='./email_search.jsp'" style="cursor: pointer;">이메일 찾기</span> <span>비밀번호 찾기</span>
+		<span onclick="location.href='./email_search.jsp'" style="cursor: pointer;">이메일 찾기</span>
+		 <span onclick="location.href='./passwd_search.jsp'" style="cursor: pointer;">비밀번호 찾기</span>
 	</div>
 </aside>
 </form>

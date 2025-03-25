@@ -15,14 +15,13 @@
 				<input type="text" name="mname" placeholder="이름을 입력하세요">
 			</div>
 			<div>
-				<input type="text" name="mtel" placeholder="휴대폰 번호는 - 빼고 숫자만 입력하세요"
-					maxlength="11">
+				<input type="text" name="mtel" placeholder="휴대폰 번호는 - 빼고 숫자만 입력하세요" maxlength="11">
 			</div>
 		</div>
 		<div>
-			<input type="button" value="이메일 찾기" onclick="search_btn()">
+			<input type="button" value="이메일 찾기" onclick="email_search_btn()">
 		</div>
 	</section>
 </form>
 
-<script src="./js/login.js?v=1"></script>
+<script src="./js/login.js?v=2"></script>

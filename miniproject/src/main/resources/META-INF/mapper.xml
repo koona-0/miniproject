@@ -38,9 +38,18 @@
 	</select>
 	
 	<!-- 이메일 찾기 -->
-	<select id="esearch_select" resultType="String">
-		select memail from member where mname= #{mname} and mtel= #{mtel}
+	<select id="esearch_select" resultType="String" parameterType="memberdto">
+		select memail from member where mname=#{mname} and mtel=#{mtel}
 	</select>
-
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pwsearch_select" resultType="String" parameterType="Map">
+		select mpw from member where memail=#{memail} and mtel=#{mtel}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="pw_update" parameterType="Map">
+	update member set mpw=#{mpw} where memail=#{memail}
+	</update>
 </mapper>
 

@@ -125,18 +125,61 @@ public class main_controller {
 	
 	//이메일 찾기
 	@PostMapping("/esearch_ok.do")
-	public String esearch_ok(member_DTO dto, Model  m) {
+	public String esearch_ok(member_DTO dto, Model m) {
 		//이메일 select
 		String mail = this.dao.esearch_select(dto);
-		System.out.println(mail);
 		
-		if(mail.equals("")) {	//해당 이메일 없을때  
-			System.out.println("없음");
-		}else {		// 이메일 있을때 
-			System.out.println(mail);			
+		if(mail == null) {	//해당 이메일 없을때 
+			mail = "가입하신 정보는 확인 되지 않습니다";
 		}
 		
-		return null;
+		// 이메일 있을때 
+		m.addAttribute("mail", mail);
+		return "search_myinfo";
+		
 	}
+	
+	//비밀번호 찾기 
+	@PostMapping("/pwsearch_ok.do")
+	public String pwsearch_ok(String memail, String mtel, Model m) {
+		//비밀번호 select
+		String pw = this.dao.pwsearch_select(memail, mtel);
+		
+		if(pw == null) {	//해당 비밀번호 없을때 
+			pw = "alert('가입하신 정보는 확인 되지 않습니다');" + "history.go(-1);";
+			m.addAttribute("msg", pw);
+			return "sc";
+		}
+		
+		// 비밀번호 있을때 
+		m.addAttribute("memail", memail);
+		return "search_mypass";
+	}
+	
+	//비밀번호 변경 
+	@PostMapping("/updatepw_ok.do")
+	public String updatepw_ok (String mpw, String memail, Model m) {
+		try {
+			//md5한 비번 
+			mpw = new m_md5().md5_code(mpw);
+			
+		}catch (Exception e) {
+			
+		}
+		//비밀번호 update
+		int result = this.dao.pw_update(mpw, memail);
+		String msg = "";
+		if(result < 1) {
+			msg = "alert('비밀번호 변경 실패');" + "history.go(-1);";
+		}else {
+			msg = "alert('비밀번호 변경이 완료되었습니다');" + "location.href='./login.jsp';";
+			
+		}
+		
+		m.addAttribute("msg", msg);
+		
+		return "sc";
+	}
+	
 	
 }
