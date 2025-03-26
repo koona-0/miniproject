@@ -20,12 +20,16 @@ var counsel_btn = function() {
 
 var checkBoxCount = function(name) {
 	var checkboxes = document.getElementsByName(name); // name으로 체크박스 그룹 가져오기
+	var i = 0;
 	var count = 0;
-	for (var i = 0; i < checkboxes.length; i++) {
+	
+	while(i < checkboxes.length){
 		if (checkboxes[i].checked) {
 			count++;
 		}
+		i++;		
 	}
-	console.log(count);
+	
+	//console.log(count);
 	return count;
 };
