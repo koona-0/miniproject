@@ -1,0 +1,13 @@
+CREATE TABLE counsel_mails (
+    cidx INT AUTO_INCREMENT PRIMARY KEY COMMENT '자동 증가값',
+    cname VARCHAR(50) NOT NULL COMMENT '상담자명',
+    cemail VARCHAR(100) NOT NULL COMMENT '이메일',
+    ctel VARCHAR(15) NOT NULL COMMENT '연락처',
+    rental_type ENUM('공공임대', '민간임대', '민간분양', '기타') NOT NULL COMMENT '임대형태',
+    housing_type ENUM('아파트', '빌라,단독주택', '사무실,상가,빌딩') NOT NULL COMMENT '주거형태',
+    counsel_date VARCHAR(50) NOT NULL COMMENT '상담일시',
+    counsel_content TEXT NOT NULL COMMENT '상담내용',
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '작성날짜'
+) COMMENT='상담 신청 테이블';
+
+select * from counsel_mails;

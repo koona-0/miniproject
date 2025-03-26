@@ -181,5 +181,42 @@ public class main_controller {
 		return "sc";
 	}
 	
+	//상담신청
+	@PostMapping("/counselok.do")
+	public String counselok(@RequestParam(defaultValue="N", required=false) String[] check1, 
+			@RequestParam(defaultValue="N", required=false) String[] check2, 
+			String cdate, String mname, String memail, String ctext, Model m) {
+		
+		//오늘 이후의 날짜인지 체크
+		boolean result = new m_isnextday().isnday(cdate);
+		
+		String msg = "";
+		
+		if(result == false) {		//오늘 이후의 날짜가 아닐때 이전페이지로 이동 
+			msg = "alert('오늘날짜 이후의 날짜를 선택해주세요');" + "history.go(-1);";
+		}else {			//오늘날짜 이후의 날짜일때 
+			
+			try {
+				//메일 전송 => 성공시 "OK"
+				String sendok = new m_sendmail(). sendok(mname, memail, ctext);
+				
+				if(sendok=="OK") {	//메일전송 성공 
+					
+					// @@ DB 저장하는 부분 추가하기 @@
+					
+					msg = "alert('상담신청 완료');" + "location.href='./index.do';";
+				}else {		//메일 전송 실패 
+					msg = "alert('상담신청 실패');" + "history.go(-1);";
+				}
+			}catch (Exception e) {
+				msg = "alert('상담신청 실패');" + "history.go(-1);";
+			}
+			
+		}
+		
+		m.addAttribute("msg", msg);
+		
+		return "sc";
+	}
 	
 }

@@ -29,12 +29,12 @@
     font-weight: 700;
 }
 .sub_ul {
-    height: 800px;
+    height: auto;
     width: 100%;
 }
 .sub_ul > li{
-    height: 45px;
-    line-height: 45px;
+    height: 50px;
+    line-height: 50px;
     float: left;
 }
 .sub_ul > li:nth-child(odd) {
@@ -71,4 +71,14 @@
     height: 150px;
     border: 1px solid gray;
     padding: 5px;
+}
+div > input[type="button"]{
+	width:700px;
+	height:50px;
+	font-size:15px;
+	font-weight:400;
+	color:#ffffff;
+	background-color:#ff6600;
+	margin-top:70px;
+    border: 0;
 }

@@ -16,7 +16,7 @@
 			<li>일반매물</li>
 			<li>추천매물</li>
 			<li>중계의뢰</li>
-			<li>상담신청</li>
+			<li onclick="location.href='./counsel.jsp'">상담신청</li>
 			<li>업체의뢰</li>
 			<li>의뢰현황</li>
 			<li class="logins"><cr:if
