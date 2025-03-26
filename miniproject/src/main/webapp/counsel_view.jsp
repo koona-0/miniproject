@@ -41,4 +41,4 @@
 </section>
 </form>
 
-<script src="./js/counsel.js?v=6"></script>
+<script src="./js/counsel.js?v=7"></script>
