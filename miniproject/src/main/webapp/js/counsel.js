@@ -13,7 +13,7 @@ var counsel_btn = function() {
 		alert("상담내용을 입력해주세요");
 	}else if (f.ctext.length > 10) {
 		alert("상담내용을 10자이상 입력해주세요");
-	} else {
+	} else { 
 		f.submit(); // 폼 제출
 	}
 };
