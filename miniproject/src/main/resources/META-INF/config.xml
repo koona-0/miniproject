@@ -8,5 +8,7 @@
 <typeAlias alias="mdchoicedto" type="miniproject.mdchoice_DTO"/>
 <typeAlias alias="copyrightdto" type="miniproject.copyright_DTO"/>
 <typeAlias alias="memberdto" type="miniproject.member_DTO"/>
+<typeAlias alias="counseldto" type="miniproject.counsel_DTO"/>
+
 </typeAliases>
 </configuration>

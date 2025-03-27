@@ -82,5 +82,19 @@ public class index_DAO implements index_mapper {
 		int result = this.st.update("pw_update",code);
 		return result;
 	}
+	
+	//분양정보 하나 출력 
+	@Override
+	public apartment_DTO one_apt_select(String aidx) {
+		apartment_DTO oapt = this.st.selectOne("one_apt_select",aidx);
+		return oapt;
+	}
+	
+	//상담신청 DB insert
+	@Override
+	public int counsel_insert(counsel_DTO dto) {
+		int result = this.st.insert("counsel_insert",dto);
+		return result;
+	}
 
 }

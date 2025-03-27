@@ -5,20 +5,26 @@
   	font-size: 28px;
 	width: 850px;
 	margin: 0 auto;
+	margin-bottom: 100px;
+	margin-top: 100px;
 }
 .weektails p {
 	height: 70px;
 	line-height: 70px;
   	font-weight: 500;
+	font-size: 35px;
 }
 .weektails > div {
-	width: 850px;
+	width: 700px;
 	height: auto;
 	margin: 0 auto;
 }
 .weektails > div > p {
 	font-weight: 400;
 	border-bottom: 1px solid #333333;
+	height: 40px;
+	line-height: 40px;
+	font-size: 24px !important;
 }
 .weektails > div > ul {
 	width: 100%;
@@ -37,7 +43,7 @@
 	background: #ccc;
 }
 .weektails > div > ul > li:nth-of-type(even) {
-	width: 670px;
+	width: 520px;
 }
 .weektails > div > ul > li:nth-of-type(13), .weektails > div > ul > li:nth-of-type(14) {
 	height: 400px;
@@ -47,4 +53,25 @@
 	width: 380px;
 	height: 380px;
 	padding-top: 10px;
+}
+
+.btn_css{
+	width:700px;
+	height:50px;
+	font-size:15px;
+	font-weight:400;
+	color:#ffffff;
+	background-color:#ff6600;
+	margin-top:70px;
+    border: 0;
+}
+.btn_close{
+	width:700px;
+	height:50px;
+	font-size:15px;
+	font-weight:400;
+	color: black;
+	background-color:#aaaaa9;
+	margin-top:70px;
+    border: 0;
 }

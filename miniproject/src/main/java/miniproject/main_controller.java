@@ -99,7 +99,7 @@ public class main_controller {
 
 	/* 로그인 페이지 */
 	@PostMapping("/loginok.do")
-	public String loginok(member_DTO ldto, Model m,  HttpServletRequest req) throws Exception {
+	public String loginok(member_DTO ldto, Model m, HttpServletRequest req) throws Exception {
 		//로그인 비번 암호화 
 		ldto.setMpw(new m_md5().md5_code(ldto.getMpw()));
 		
@@ -183,40 +183,70 @@ public class main_controller {
 	
 	//상담신청
 	@PostMapping("/counselok.do")
-	public String counselok(@RequestParam(defaultValue="N", required=false) String[] check1, 
+	public String counselok(
+			@RequestParam(defaultValue="N", required=false) String[] check1, 
 			@RequestParam(defaultValue="N", required=false) String[] check2, 
-			String cdate, String mname, String memail, String ctext, Model m) {
+			counsel_DTO dto, Model m) {
 		
-		//오늘 이후의 날짜인지 체크
-		boolean result = new m_isnextday().isnday(cdate);
-		
-		String msg = "";
-		
-		if(result == false) {		//오늘 이후의 날짜가 아닐때 이전페이지로 이동 
+		// 오늘 이후의 날짜인지 체크
+		boolean result = new m_isnextday().isnday(dto.getCdate());
+
+		String msg = "";	//view로 전달할 스크립트
+
+		if (result == false) { // 오늘 이후의 날짜가 아닐때 이전페이지로 이동
 			msg = "alert('오늘날짜 이후의 날짜를 선택해주세요');" + "history.go(-1);";
-		}else {			//오늘날짜 이후의 날짜일때 
-			
+		} else { // 오늘날짜 이후의 날짜일때
+
 			try {
-				//메일 전송 => 성공시 "OK"
-				String sendok = new m_sendmail(). sendok(mname, memail, ctext);
+				//체크박스 처리
+				dto.setRental_type(String.join(",", check1));
+				dto.setHousing_type(String.join(",", check2));
 				
-				if(sendok=="OK") {	//메일전송 성공 
+				System.out.println("임대 : " + dto.getRental_type());
+				System.out.println("주거 : " + dto.getHousing_type());
+				
+				// DB 저장
+				int db_result = this.dao.counsel_insert(dto);
+
+				if (db_result < 1) { // DB 저장 실패
+					msg = "alert('상담신청 실패 : DB');" + "history.go(-1);";
+				} else { 			// DB 저장 성공
 					
-					// @@ DB 저장하는 부분 추가하기 @@
-					
-					msg = "alert('상담신청 완료');" + "location.href='./index.do';";
-				}else {		//메일 전송 실패 
-					msg = "alert('상담신청 실패');" + "history.go(-1);";
+					// 메일 전송 => 성공시 "OK"
+					String sendok = new m_sendmail().sendok(dto.getMname(), dto.getMemail(), dto.getCtext());
+
+					if (sendok == "OK") { // 메일전송 성공
+						msg = "alert('상담신청 완료');" + "location.href='./index.do';";
+					} else { 		// 메일 전송 실패
+						msg = "alert('상담신청 실패 : mail');" + "history.go(-1);";
+					}
 				}
-			}catch (Exception e) {
-				msg = "alert('상담신청 실패');" + "history.go(-1);";
+				
+			} catch (Exception e) {
+				msg = "alert('상담신청 실패 : e');" + "history.go(-1);";
 			}
-			
 		}
-		
 		m.addAttribute("msg", msg);
-		
+
 		return "sc";
+	}
+	
+	//분양정보 선택 => idx를 받아 아파트 dto 세션 전달 
+	@GetMapping("/week_tails.do")
+	public String week_tails(String aidx, Model m, HttpServletRequest req) {
+		
+		apartment_DTO oapt = this.dao.one_apt_select(aidx);
+		String msg = null;
+		
+		if(oapt == null) {	//아파트 정보 없을 때 
+			msg = "alert('잘못된 접근입니다.');" + "history.go(-1);";
+			m.addAttribute("msg", msg);
+			return "sc";
+		}else {		//아파트 정보 있을 때 
+			HttpSession session = req.getSession();
+			session.setAttribute("oapt", oapt);
+		}
+		return null;
 	}
 	
 }

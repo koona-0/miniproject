@@ -7,11 +7,9 @@ var counsel_btn = function() {
 		alert("주거형태를 최소 1개 체크해주세요.");
 	} else if (f.cdate.value == "") {
 		alert("날짜를 선택하세요");
-	}
-	//오늘날짜이후 체크는 컨트롤러 모델에서
-	 else if (f.ctext.value == "") {
+	} else if (f.ctext.value == "") {
 		alert("상담내용을 입력해주세요");
-	}else if (f.ctext.length > 10) {
+	}else if (f.ctext.value.length < 10) {
 		alert("상담내용을 10자이상 입력해주세요");
 	} else { 
 		f.submit(); // 폼 제출

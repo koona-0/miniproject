@@ -11,7 +11,7 @@
 		<cr:forEach var="aptdata" items="${aptList}">
 			<div class="week_estates">
 				<ul>
-					<li><a href=""> <span>매매</span>
+					<li><a href="./week_tails.do?aidx=${aptdata.aidx}"> <span>매매</span>
 							<div>${aptdata.aptnm}</div>
 							<aside>${aptdata.addr}</aside> <span>${aptdata.apt_type} |
 								${aptdata.rent_type}</span> <label>${aptdata.sale_date} |

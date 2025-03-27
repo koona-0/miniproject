@@ -16,16 +16,16 @@
 <li><input type="text" class="sel_input" name="mtel" value="${sessionScope.dto.mtel}" readonly></li> 
 <li>임대형태</li>    
 <li>
-<label><input type="checkbox" name="check1" class="sel_check" value="Y"> 공공임대</label>
-<label><input type="checkbox" name="check1" class="sel_check" value="Y"> 민간임대</label>
-<label><input type="checkbox" name="check1" class="sel_check" value="Y"> 민간분양</label>
-<label><input type="checkbox" name="check1" class="sel_check" value="Y"> 기타</label>
+<label><input type="checkbox" name="check1" class="sel_check" value="공공임대"> 공공임대</label>
+<label><input type="checkbox" name="check1" class="sel_check" value="민간임대"> 민간임대</label>
+<label><input type="checkbox" name="check1" class="sel_check" value="민간분양"> 민간분양</label>
+<label><input type="checkbox" name="check1" class="sel_check" value="기타"> 기타</label>
 </li>   
 <li>주거형태</li>    
 <li>
-<label><input type="checkbox" name="check2" class="sel_check" value="Y"> 아파트</label>
-<label><input type="checkbox" name="check2" class="sel_check" value="Y"> 빌라,단독주택</label>
-<label><input type="checkbox" name="check2" class="sel_check" value="Y"> 사무실.상가.빌딩</label>
+<label><input type="checkbox" name="check2" class="sel_check" value="아파트"> 아파트</label>
+<label><input type="checkbox" name="check2" class="sel_check" value="빌라¸단독주택"> 빌라,단독주택</label>
+<label><input type="checkbox" name="check2" class="sel_check" value="사무실¸상가¸빌딩"> 사무실,상가,빌딩</label>
 </li>       
 <li>상담일시</li>    
 <li>
@@ -41,4 +41,4 @@
 </section>
 </form>
 
-<script src="./js/counsel.js?v=7"></script>
+<script src="./js/counsel.js?v=9"></script>

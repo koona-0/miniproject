@@ -51,5 +51,20 @@
 	<update id="pw_update" parameterType="Map">
 	update member set mpw=#{mpw} where memail=#{memail}
 	</update>
+	
+	<!-- 분양정보 : 하나의 아파트 정보 검색 -->
+	<select id="one_apt_select" resultType="apartmentdto" parameterType="String">
+		select * from apartment_info where aidx=#{aidx}
+	</select>
+	
+	<!-- 상담신청 DB insert -->
+	<insert id="counsel_insert">
+		insert into counsel_mails (cidx, mname, memail, mtel, rental_type, housing_type, cdate, ctext, create_date)
+		values ('0', #{mname}, #{memail}, #{mtel}, #{rental_type}, #{housing_type}, #{cdate}, #{ctext}, now())
+	</insert>
+	
+	
+	
+	
 </mapper>
 

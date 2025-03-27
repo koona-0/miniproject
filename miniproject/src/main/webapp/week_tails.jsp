@@ -5,18 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상담신청</title>
+<title>금주 분양 매물 정보</title>
 <link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
-<link rel="stylesheet" type="text/css" href="./css/counsel.css?v=3">
+<link rel="stylesheet" type="text/css" href="./css/week_tails.css?v=1">
 </head>
 <body>
-
 	<!-- 상단 -->
 	<cr:import url="./top.jsp"></cr:import>
-
-	<!-- view -->
+	
+	<!-- View -->
 	<main>
-		<cr:import url="./counsel_view.jsp"></cr:import>
+		<cr:import url="./week_tails_view.jsp"></cr:import>
 	</main>
 
 	<!-- 카피라이터 -->

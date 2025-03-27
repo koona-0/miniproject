@@ -23,5 +23,9 @@ public interface index_mapper {
 	public String pwsearch_select(String memail, String mtel);
 	
 	public int pw_update(String mpw, String memail);
+	
+	public apartment_DTO one_apt_select(String aidx);
+	
+	public int counsel_insert(counsel_DTO dto);
 
 }
