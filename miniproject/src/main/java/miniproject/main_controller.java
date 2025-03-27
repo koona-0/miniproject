@@ -1,7 +1,9 @@
 package miniproject;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -235,16 +237,34 @@ public class main_controller {
 	@GetMapping("/week_tails.do")
 	public String week_tails(String aidx, Model m, HttpServletRequest req) {
 		
-		apartment_DTO oapt = this.dao.one_apt_select(aidx);
+		apartment_DTO selapt = this.dao.one_apt_select(aidx);
 		String msg = null;
 		
-		if(oapt == null) {	//아파트 정보 없을 때 
+		if(selapt == null) {	//아파트 정보 없을 때 
 			msg = "alert('잘못된 접근입니다.');" + "history.go(-1);";
 			m.addAttribute("msg", msg);
 			return "sc";
 		}else {		//아파트 정보 있을 때 
-			HttpSession session = req.getSession();
-			session.setAttribute("oapt", oapt);
+			//세션 ㄴㄴ => 쌓이기만해서 버벅거림! 
+//			HttpSession session = req.getSession();
+//			session.setAttribute("oapt", oapt);
+			
+			//맵으로 만들어서 전달해보쟈 String.valueOf()
+			Map<String, String> oapt = new HashMap<String, String>();
+			oapt.put("aidx", String.valueOf(selapt.getAidx()));
+			oapt.put("aptnm", selapt.getAptnm());
+			oapt.put("addr", selapt.getAddr());
+			oapt.put("apt_type", selapt.getApt_type());
+			oapt.put("rent_type", selapt.getRent_type());
+			oapt.put("sale_date", selapt.getSale_date());
+			oapt.put("move_date", selapt.getMove_date());
+			oapt.put("img", selapt.getImg());
+			oapt.put("heat", selapt.getHeat());
+			oapt.put("units", String.valueOf(selapt.getUnits()));
+			oapt.put("buildings", String.valueOf(selapt.getBuildings()));
+			oapt.put("builder", selapt.getBuilder());
+			oapt.put("reg_date", selapt.getReg_date());
+			m.addAttribute("oapt", oapt);
 		}
 		return null;
 	}

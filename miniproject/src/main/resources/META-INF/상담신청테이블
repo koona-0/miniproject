@@ -12,6 +12,4 @@ CREATE TABLE counsel_mails (
 ) COMMENT='상담 신청 테이블';
 
 
-
-
 select * from counsel_mails;

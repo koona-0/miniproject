@@ -15,7 +15,9 @@
 	
 	<!-- View -->
 	<main>
-		<cr:import url="./week_tails_view.jsp"></cr:import>
+		<cr:import url="./week_tails_view.jsp">
+		<cr:param name="oapt"/>
+		</cr:import>
 	</main>
 
 	<!-- 카피라이터 -->
