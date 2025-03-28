@@ -9,6 +9,7 @@
 <typeAlias alias="copyrightdto" type="miniproject.copyright_DTO"/>
 <typeAlias alias="memberdto" type="miniproject.member_DTO"/>
 <typeAlias alias="counseldto" type="miniproject.counsel_DTO"/>
+<typeAlias alias="reservationdto" type="miniproject.reservation_DTO"/>
 
 </typeAliases>
 </configuration>

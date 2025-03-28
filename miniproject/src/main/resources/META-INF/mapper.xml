@@ -63,8 +63,16 @@
 		values ('0', #{mname}, #{memail}, #{mtel}, #{rental_type}, #{housing_type}, #{cdate}, #{ctext}, now())
 	</insert>
 	
-	
-	
+	<!-- 모델하우스 사전방문 예약 DB insert -->
+	<insert id="visit_insert">
+    	insert into visit_info (vidx, aptnm, vdate, vtime, vname, vtel, vcount, res_date) 
+    	values ('0', #{aptnm}, #{vdate}, #{vtime}, #{vname}, #{vtel}, #{vcount}, now())
+	</insert>
+		
+	<!-- 로그인한 유저가 선택한 아파트 예약 select -->
+	<select id="visit_select" resultType="reservationdto" parameterType="Map">
+		select * from visit_info where aptnm=#{aptnm} and vname=#{vname}
+	</select>
 	
 </mapper>
 

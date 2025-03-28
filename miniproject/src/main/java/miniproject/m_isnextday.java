@@ -19,10 +19,32 @@ public class m_isnextday {
 		return result; 
 	}
 	
+	//이후 시간일때 true 반환 
+	public boolean isndaytime(String dt) {
+		boolean result = false;	
+		dt = dt.replace("-", "");
+		dt = dt.replace(":", "");
+		
+		if(Long.parseLong(dt) < Long.parseLong(this.today_time())) {
+			result = false;
+		}else {
+			result = true;			
+		}
+//		System.out.println("바뀐입력시간 :"+dt);
+//		System.out.println("현재시간 :"+today_time());
+		return result; 
+	}
+	
 	public String today() {		//오늘 날짜 리턴 
 		Date day = new Date();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
 		return sf.format(day);
+	}
+	
+	public String today_time() {		//현재 시간 리턴 
+		Date daytime = new Date();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmm");
+		return sf.format(daytime);
 	}
 
 }

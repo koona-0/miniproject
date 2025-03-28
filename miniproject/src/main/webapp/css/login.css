@@ -26,7 +26,7 @@
 .login_pg > div:nth-of-type(2) {
 	background: url(../ico/password.svg) no-repeat 600px 25px /24px 24px;
 }
-.login_pg > div:nth-of-type(4) {
+.login_pg > div:nth-of-type(5) {
 	margin-bottom: 200px;
 }
 .login_pg > div > input {
@@ -42,7 +42,16 @@
 	background: #ff6600;
 	color: #ffffff;
 	text-align: center;
+	border: 0;
 }
+.kakao_btn{
+	margin-top: 10px;
+	background: #ffbb00 !important;
+	color: #282828 !important;
+	text-align: center;
+	border: 0;
+}
+
 .login_pg > div > input::placeholder {
 	padding-left: 10px;
 }
@@ -50,12 +59,11 @@
 	position: relative;
 	color: #999999;
 }
-.login_pg > div > span:nth-of-type(1) {
+.login_pg > div > span:nth-of-type(1), span:nth-of-type(2) {
 	margin-right: 30px;
 }
-.login_pg > div > span:nth-of-type(1)::after {
+.login_pg > div > span:nth-of-type(1)::after, span:nth-of-type(2)::after {
 	content: "|";
 	position: absolute;
 	margin-left: 15px;
-		
 }

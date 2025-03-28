@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<form id="vform" method="post" action="./reservation.do">
+<input type="hidden" name="aptnm" value="${oapt.aptnm}">
+</form>
+
 <div class="weektails">
 	<p>분양정보</p>
 	<div id="weektails">
@@ -23,10 +27,16 @@
 			<li><img src="./room/${oapt.img}"></li>
 		</ul>
 	</div>
+	
+	<cr:if test="${isres == false}">
 	<div>
-		<button class="btn_css">방문예약</button>
+		<button class="btn_css" onclick="vform.submit();">방문예약</button>
 	</div>
+	</cr:if>
+	<cr:if test="${isres == true}">
 	<div>
-		<button class="btn_close">방문예약완료</button>
+	${rsvt.aptnm}
+		<button class="btn_close" onclick="location.href='./reservation_check.do';">방문예약완료</button>
 	</div>
+	</cr:if>
 </div>

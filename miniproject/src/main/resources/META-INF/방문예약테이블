@@ -1,0 +1,13 @@
+CREATE TABLE visit_info (
+    vidx INT AUTO_INCREMENT COMMENT '자동 증가값',
+    aptnm VARCHAR(100) NOT NULL COMMENT '아파트명',
+    vdate VARCHAR(10) NOT NULL COMMENT '방문 일자',
+    vtime VARCHAR(8) NOT NULL COMMENT '방문 시간',
+    vname VARCHAR(50) NOT NULL COMMENT '방문자 이름',
+    vtel VARCHAR(15) NOT NULL COMMENT '방문자 연락처',
+    vcount ENUM('1', '2') NOT NULL COMMENT '방문 인원',
+    res_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '예약 일자',
+    PRIMARY KEY (vidx)
+);
+
+select * from visit_info;

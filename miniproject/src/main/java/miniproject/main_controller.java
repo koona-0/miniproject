@@ -232,10 +232,10 @@ public class main_controller {
 
 		return "sc";
 	}
-	
-	//분양정보 선택 => idx를 받아 아파트 dto 세션 전달 
+	Map<String, Object> rsvt = null;
+	//분양정보 선택 => idx를 받아 아파트 dto를 Map으로 전달 / 방문예약or완료 
 	@GetMapping("/week_tails.do")
-	public String week_tails(String aidx, Model m, HttpServletRequest req) {
+	public String week_tails(String aidx, String mname, Model m, HttpServletRequest req) {
 		
 		apartment_DTO selapt = this.dao.one_apt_select(aidx);
 		String msg = null;
@@ -249,8 +249,9 @@ public class main_controller {
 //			HttpSession session = req.getSession();
 //			session.setAttribute("oapt", oapt);
 			
-			//맵으로 만들어서 전달해보쟈 String.valueOf()
-			Map<String, String> oapt = new HashMap<String, String>();
+			//맵으로 만들어서 전달해봐야징... String.valueOf()
+			/*
+			Map<String, Object> oapt = new HashMap<String, Object>();
 			oapt.put("aidx", String.valueOf(selapt.getAidx()));
 			oapt.put("aptnm", selapt.getAptnm());
 			oapt.put("addr", selapt.getAddr());
@@ -264,8 +265,59 @@ public class main_controller {
 			oapt.put("buildings", String.valueOf(selapt.getBuildings()));
 			oapt.put("builder", selapt.getBuilder());
 			oapt.put("reg_date", selapt.getReg_date());
+			*/
+			
+			//dto를 Map으로 바꾸는 모델 사용
+			Map<String, Object> oapt =  new m_dtoToMap().dtm(selapt);
 			m.addAttribute("oapt", oapt);
+			
+			//예약 있는가?
+			reservation_DTO rdto = this.dao.visit_select(selapt.getAptnm(), mname);
+			
+			boolean isres = false; // 예약 있을때 isres = true
+			if (rdto == null) {
+			} else {
+				isres = true;
+				this.rsvt = new m_dtoToMap().dtm(rdto);
+				m.addAttribute("rsvt", this.rsvt);
+			}
+			m.addAttribute("isres", isres);
+			
 		}
+		return null;
+	}
+	
+	// 모델하우스 사전 방문 예약 페이지로 아파트이름 전달
+	@PostMapping("/reservation.do")
+	public String reservation(String aptnm, Model m) {
+		m.addAttribute("aptnm", aptnm);
+		return null;
+	}
+	
+	// 모델하우스 사전 방문 예약 완료
+	@PostMapping("/reservationok.do")
+	public String reservationok(reservation_DTO rdto, Model m) {
+		// 날짜 체크
+		boolean isntime = new m_isnextday().isndaytime(rdto.getVdate() + rdto.getVtime());
+		String msg = "";
+		if (isntime == false) { // 현재 이전 시간일떄
+			msg = "alert('현재 이후의 날짜, 시간을 선택해주세요');" + "history.go(-1);";
+		} else { // 현재시간 이후의 시간일때
+			// DB 저장
+			int result = this.dao.visit_insert(rdto);
+			if (result < 1) { // DB 저장 실패
+				msg = "alert('예약신청 실패 : DB');" + "history.go(-1);";
+			} else { // DB 저장 성공
+				msg = "alert('방문 예약 완료');" + "location.href='./index.do';";
+			}
+		}
+		m.addAttribute("msg", msg);
+		return "sc";
+	}
+	
+	@GetMapping("/reservation_check.do")
+	public String reservation_check(Model m) {
+		m.addAttribute("rsvt", rsvt);
 		return null;
 	}
 	

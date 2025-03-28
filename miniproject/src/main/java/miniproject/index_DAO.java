@@ -96,5 +96,22 @@ public class index_DAO implements index_mapper {
 		int result = this.st.insert("counsel_insert",dto);
 		return result;
 	}
+	
+	//모델하우스 사전방문 예약 DB insert
+	@Override
+	public int visit_insert(reservation_DTO dto) {
+		int result = this.st.insert("visit_insert",dto);
+		return result;
+	}
+	
+	//예약 select
+	@Override
+	public reservation_DTO visit_select(String aptnm, String vname) {
+		Map<String, String> datas = new HashMap<String, String>();
+		datas.put("aptnm", aptnm);
+		datas.put("vname", vname);
+		reservation_DTO dto = this.st.selectOne("visit_select", datas);
+		return dto;
+	}
 
 }

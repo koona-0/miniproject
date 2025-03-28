@@ -27,5 +27,9 @@ public interface index_mapper {
 	public apartment_DTO one_apt_select(String aidx);
 	
 	public int counsel_insert(counsel_DTO dto);
+	
+	public int visit_insert(reservation_DTO dto);
+	
+	public reservation_DTO visit_select(String aptnm, String vname);
 
 }

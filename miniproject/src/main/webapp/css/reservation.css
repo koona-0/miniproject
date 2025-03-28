@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.sub {
+	font-family: 'Noto Sans KR';
+	font-size: 15px;
+	font-weight: 400;
+	width: 700px;
+	height:auto !important;
+	margin: 0 auto;
+	position:relative;
+	left:30px;
+}
+.sub > p {
+    font-size: 28px;
+	font-weight: 500;
+	color: #1d1d1d;
+	text-align: center;
+	height: 50px;
+	margin: 100px 0 50px;
+	line-height: 50px;
+}
+.sub > div {
+	line-height:70px;
+	margin-top:70px;
+}
+
+.list_title {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.list_title > span {
+    display: block;
+    width: 50%;
+    line-height: 30px;
+    height: 30px;
+}
+.list_title > span:nth-child(even){
+    text-align: right;
+}
+
+.sub_ul {
+    height: auto;
+    width: 100%;
+}
+.sub_ul > li{
+    height: 50px;
+    line-height: 50px;
+    float: left;
+}
+.sub_ul > li:nth-child(odd) {
+    width: 100px;
+}
+.sub_ul > li:nth-child(even) {
+    width: 600px;
+}
+.sub_ul label {
+    margin-right: 10px;
+}
+.sel_input{
+    width: 600px;
+	height: 40px;
+	background-color: transparent;
+	border: 1px solid #ccc;
+    text-indent: 10px;
+}
+.sel_input2{
+    width: 200px;
+	height: 40px;
+	background-color: transparent;
+	border: 1px solid #ccc;
+    text-indent: 10px;
+}
+
+.sel_check {
+    width: 20px;
+    height: 20px;
+    vertical-align: -5px;
+}
+.sel_input3 {
+    width: 600px;
+    height: 150px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+div > input[type="button"]{
+	width:700px;
+	height:50px;
+	font-size:15px;
+	font-weight:400;
+	color:#ffffff;
+	background-color:#ff6600;
+	margin-top:70px;
+    border: 0;
+}
