@@ -27,3 +27,8 @@ function check_all(ck){	//ck : true, false
 function checkdata(){
 	
 }
+
+function goboardview(idx){
+	gvform.bidx.value = idx;
+	gvform.submit();
+}

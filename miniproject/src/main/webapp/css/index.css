@@ -458,7 +458,27 @@ footer{
 }
 
 .logos {
-  width: 100px;
   height: 100px;
   object-fit: cover;
 }
+
+.login_info {
+  position: absolute;
+  width: 170px;
+  height: auto;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  background-color: white;
+  left: -100px;
+  bottom: -30px;
+}
+.login_info > li{
+  width: inherit;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+

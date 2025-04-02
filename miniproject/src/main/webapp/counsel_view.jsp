@@ -3,6 +3,8 @@
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <form id="f" method="post" action="./counselok.do">
+<input type="hidden" name="midx" value="${sessionScope.dto.midx
+}">
 <section class="sub">
 <p>상담신청</p>
 <div>

@@ -5,11 +5,12 @@
 <typeAliases>
 
 <typeAlias alias="apartmentdto" type="miniproject.apartment_DTO"/>
-<typeAlias alias="mdchoicedto" type="miniproject.mdchoice_DTO"/>
 <typeAlias alias="copyrightdto" type="miniproject.copyright_DTO"/>
 <typeAlias alias="memberdto" type="miniproject.member_DTO"/>
 <typeAlias alias="counseldto" type="miniproject.counsel_DTO"/>
+<typeAlias alias="counselviewdto" type="miniproject.counselview_DTO"/>
 <typeAlias alias="reservationdto" type="miniproject.reservation_DTO"/>
+<typeAlias alias="rsvtviewdto" type="miniproject.rsvtview_DTO"/>
 <typeAlias alias="mdboarddto" type="miniproject.mdboard_DTO"/>
 
 </typeAliases>

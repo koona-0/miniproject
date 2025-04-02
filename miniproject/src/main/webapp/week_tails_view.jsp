@@ -4,6 +4,7 @@
 
 <form id="vform" method="post" action="./reservation.do">
 <input type="hidden" name="aptnm" value="${oapt.aptnm}">
+<input type="hidden" name="aidx" value="${oapt.aidx}">
 </form>
 
 <div class="weektails">
@@ -33,9 +34,9 @@
 		<button class="btn_css" onclick="vform.submit();">방문예약</button>
 	</div>
 	</cr:if>
+	
 	<cr:if test="${isres == true}">
 	<div>
-	${rsvt.aptnm}
 		<button class="btn_close" onclick="location.href='./reservation_check.do';">방문예약완료</button>
 	</div>
 	</cr:if>

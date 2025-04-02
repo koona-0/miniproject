@@ -1,6 +1,7 @@
 package miniproject;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface index_mapper {
 	List<apartment_DTO> apartment_select();
 
-	List<mdchoice_DTO> mdchoice_select();
+	List<mdboard_DTO> mdboard_index();
 
 	List<copyright_DTO> copyright_select();
 
@@ -26,14 +27,20 @@ public interface index_mapper {
 	
 	public apartment_DTO one_apt_select(String aidx);
 	
-	public int counsel_insert(counsel_DTO dto);
+	public int counsel_insert(counselview_DTO dto);
 	
 	public int visit_insert(reservation_DTO dto);
 	
 	public reservation_DTO visit_select(String aptnm, String vname);
 	
-	public List<mdboard_DTO> mdboard_select(Integer pgno);
+	public List<Map<String,Object>> mdboard_select(Integer pgno);
 	
 	public int mdboard_total();
+	
+	public Map<String,Object> mdboard_one(int bidx);
+	
+	public int mdboard_viewplus(int bidx);
+	
+	public int mdboard_insert(mdboard_DTO dto);
 
 }

@@ -1,5 +1,6 @@
 package miniproject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +23,9 @@ public class index_DAO implements index_mapper {
 	}
 
 	@Override
-	public List<mdchoice_DTO> mdchoice_select() {
-		List<mdchoice_DTO> mcList = this.st.selectList("mdchoice_select");
-		return mcList;
+	public List<mdboard_DTO> mdboard_index() {
+		List<mdboard_DTO> mdList = this.st.selectList("mdboard_index");
+		return mdList;
 	}
 
 	@Override
@@ -92,7 +93,7 @@ public class index_DAO implements index_mapper {
 	
 	//상담신청 DB insert
 	@Override
-	public int counsel_insert(counsel_DTO dto) {
+	public int counsel_insert(counselview_DTO dto) {
 		int result = this.st.insert("counsel_insert",dto);
 		return result;
 	}
@@ -118,20 +119,48 @@ public class index_DAO implements index_mapper {
 	
 	//추천분양정보게시판 전체 + 페이징 select
 	@Override
-	public List<mdboard_DTO> mdboard_select(Integer pgno) {
+	public List<Map<String,Object>> mdboard_select(Integer pgno) {
 		Map<String,Integer> data = new HashMap<String,Integer>();
 		data.put("spage", this.page_ea * (pgno - 1));	
 		data.put("epage", this.page_ea);	
 		
-		List<mdboard_DTO> all = this.st.selectList("mdboard_select",data);
-		return all;
+		List<mdboard_DTO> boardList = this.st.selectList("mdboard_select",data);
+		
+		List<Map<String,Object>> bd = new ArrayList<Map<String,Object>>();
+		for (mdboard_DTO board : boardList) {
+			Map<String,Object> bdata = new m_dtoToMap().dtm(board);
+			bd.add(bdata);
+        }
+		return bd;
 	}
 	
-	//추천분양정보게시판 게시물 
+	//추천분양정보게시판 게시물 개수 
 	@Override
 	public int mdboard_total() {
 		int total = this.st.selectOne("mdboard_total");
 		return total;
+	}
+	
+	// 클릭한 추천분양정보게시물 
+	@Override
+	public Map<String, Object> mdboard_one(int bidx) {
+		mdboard_DTO bdata = this.st.selectOne("mdboard_one",bidx);
+		Map<String,Object> bmap = new m_dtoToMap().dtm(bdata);
+		return bmap;
+	}
+	
+	// 클릭한 추천분양정보게시물 조회수+1
+	@Override
+	public int mdboard_viewplus(int bidx) {
+		int result = this.st.update("mdboard_viewplus",bidx);
+		return result;
+	}
+	
+	// 추천분양정보게시판 게시물 글쓰기 
+	@Override
+	public int mdboard_insert(mdboard_DTO dto) {
+		int result = this.st.insert("mdboard_insert",dto);	
+		return result;
 	}
 
 }

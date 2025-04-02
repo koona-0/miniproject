@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>추천분양 정보 게시판</title>
+<link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
+<link rel="stylesheet" type="text/css" href="./css/md_board_view.css?v=6">
+<script src="./ckeditor/ckeditor.js"></script>
+<style>
+.box {
+   width: 800px;
+   height: 300px;
+   border: 1px solid black;
+   overflow: auto;
+}
+
+</style>
+</head>
+<body>
+<!--최상단-->
+ <header>
+  <div class="top_banner"></div>
+ </header>
+  <!--최상단끝-->
+ <!--메뉴-->
+ <nav>
+  <div class="menus">
+    <ul class="menus_ul">
+      <li><img src="./logo/e_click_logo.png"></li>
+      <li>일반매물</li>
+      <li>추천매물</li>
+      <li>중계의뢰</li>
+      <li>상담신청</li>
+      <li>업체의뢰</li>
+      <li>의뢰현황</li>
+      <li class="logins">
+        <!--
+        홍길동님 환영합니다.[로그아웃]
+        -->
+        <span title="로그인"><img src="./ico/login.svg"></span>
+        <span title="회원가입"><img src="./ico/membership.svg"></span>
+      </li>
+    </ul>
+  </div>
+ </nav>
+  <!--메뉴끝-->
+<main>
+    <section class="sub">
+        <p>추천분양 정보 게시판</p>
+        <div class="boards">이번주 신규 매물정보를 한눈에 확인하실 수 있습니다.</div>
+        <div class="info_board">
+          <ul>
+            <li>제&nbsp;&nbsp;&nbsp;목</li>
+            <li><input type="text" class="board_in2"></li>
+            <li>글쓴이</li>
+            <li><input type="text" class="board_in1"></li>
+            <li>썸네일 이미지</li>
+            <li><input type="file"></li>
+            <li class="litext">내&nbsp;&nbsp;&nbsp;용</li>
+            <li class="litext">
+                <textarea id="board_text">
+                    
+                </textarea>
+            </li>
+          </ul>
+        </div>
+        <div class="board_btn">
+            <input type="button" value="등&nbsp;&nbsp;&nbsp;록" class="btns">
+        </div>
+    </section>
+    <script>
+    window.onload = function(){
+        CKEDITOR.replace('board_text',{
+            height : 360
+        });
+    };
+    </script>
+</main>
+
+<!-- 카피라이터 -->
+ <footer>
+  <div class="copyright">
+    <ol>
+      <li>
+        <img src="./logo/e_click_logo.png" class="logos">
+      </li>
+      <li>
+        <ul>
+          <li>회사소개</li>
+          <li>이용약관</li>
+          <li>위치기반서비스 약관</li>
+          <li>제휴문의</li>
+          <li>개인정보처리방침</li>
+          <li>신고센터</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>저작권규약</li>
+          <li>책임한계 및 법적고지</li>
+          <li>이메일 무단수집거부</li>
+          <li>고객센터문의</li>
+          <li></li>
+          <li></li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>e-Click 주식회사 | 대표 : 홍길동</li>
+          <li>서울특별시 종로구 3가 국일빌딩 5F</li>
+          <li>사업자번호 : 211-81-12345 | 통신판매업 : 2023-서울종로-1234호</li>
+          <li>정보보호책임자 : 홍길동</li>
+          <li>영업문의 : 02-123-5678</li>
+          <li>팩스번호 : 02-550-1234</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+ </footer>
+</body>
+</html>

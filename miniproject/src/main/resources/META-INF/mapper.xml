@@ -9,9 +9,8 @@
 		apartment_info order by aidx desc
 	</select>
 
-	<select id="mdchoice_select" resultType="mdchoicedto">
-		select * from md_choice
-		order by choice_idx desc
+	<select id="mdboard_index" resultType="mdboarddto">
+		select * from md_board order by bidx desc LIMIT 0, 4
 	</select>
 
 	<select id="copyright_select" resultType="copyrightdto">
@@ -59,19 +58,19 @@
 	
 	<!-- 상담신청 DB insert -->
 	<insert id="counsel_insert">
-		insert into counsel_mails (cidx, mname, memail, mtel, rental_type, housing_type, cdate, ctext, create_date)
-		values ('0', #{mname}, #{memail}, #{mtel}, #{rental_type}, #{housing_type}, #{cdate}, #{ctext}, now())
+		insert into counsel_mails (cidx, midx, rental_type, housing_type, cdate, ctext, create_date)
+		values ('0', #{midx}, #{rental_type}, #{housing_type}, #{cdate}, #{ctext}, now())
 	</insert>
 	
 	<!-- 모델하우스 사전방문 예약 DB insert -->
 	<insert id="visit_insert">
-    	insert into visit_info (vidx, aptnm, vdate, vtime, vname, vtel, vcount, res_date) 
-    	values ('0', #{aptnm}, #{vdate}, #{vtime}, #{vname}, #{vtel}, #{vcount}, now())
+    	insert into visit_info (vidx, aidx, midx, vdate, vtime, vcount, res_date) 
+    	values ('0', #{aidx}, #{midx}, #{vdate}, #{vtime}, #{vcount}, now())
 	</insert>
 		
 	<!-- 로그인한 유저가 선택한 아파트 예약 select -->
 	<select id="visit_select" resultType="reservationdto" parameterType="Map">
-		select * from visit_info where aptnm=#{aptnm} and vname=#{vname}
+		select * from visit_info_view where aptnm=#{aptnm} and vname=#{vname}
 	</select>
 	
 	<!-- 추천분양정보게시판 전체 + 페이징 select -->
@@ -79,10 +78,26 @@
 	select * from md_board order by bidx desc limit #{spage},#{epage}
 	</select>
 
-	<!-- 추천분양정보게시판 게시물 -->
+	<!-- 추천분양정보게시판 게시물 개수 -->
 	<select id="mdboard_total" resultType="int">
 		select count(*) as total from md_board
 	</select>
+	
+	<!-- 클릭한 추천분양정보게시물 -->
+	<select id="mdboard_one" resultType="mdboarddto" parameterType="int">
+	select * from md_board where bidx=#{bidx}
+	</select>
+	
+	<!-- 클릭한 게시물 조회수 +1 -->
+	<update id="mdboard_viewplus" parameterType="int">
+	update md_board set view_count=view_count+1 where bidx=#{bidx}
+	</update>
+	
+	<!-- 추천분양정보게시판 게시물 글쓰기 -->
+	<insert id="mdboard_insert">
+	insert into md_board (bidx, btitle, bwriter, reg_date, view_count, btext, b_url, file_ori, file_new,file_url)
+	values ('0',#{btitle},#{bwriter},now(),'0',#{btext},#{b_url},#{file_ori},#{file_new},#{file_url})
+	</insert>
 	
 </mapper>
 

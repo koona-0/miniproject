@@ -1,0 +1,50 @@
+CREATE TABLE visit_info (
+    vidx INT AUTO_INCREMENT COMMENT '자동 증가값',
+    aptnm VARCHAR(100) NOT NULL COMMENT '아파트명',
+    vdate VARCHAR(10) NOT NULL COMMENT '방문 일자',
+    vtime VARCHAR(8) NOT NULL COMMENT '방문 시간',
+    vname VARCHAR(50) NOT NULL COMMENT '방문자 이름',
+    vtel VARCHAR(15) NOT NULL COMMENT '방문자 연락처',
+    vcount ENUM('1', '2') NOT NULL COMMENT '방문 인원',
+    res_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '예약 일자',
+    PRIMARY KEY (vidx)
+);	-- 기존테이블 
+
+-- 외래키, 뷰 수정
+CREATE TABLE visit_info (
+    vidx INT AUTO_INCREMENT COMMENT '방문정보 인덱스',
+    aidx INT NOT NULL COMMENT '아파트 인덱스',
+    midx INT NOT NULL COMMENT '방문자 인덱스',
+    vdate VARCHAR(10) NOT NULL COMMENT '방문 일자',
+    vtime VARCHAR(8) NOT NULL COMMENT '방문 시간',
+    vcount ENUM('1', '2') NOT NULL COMMENT '방문 인원',
+    res_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '예약 일자',
+    PRIMARY KEY (vidx),
+    foreign key (aidx) references apartment_info(aidx),
+    foreign key (midx) references member(midx)
+);
+
+-- 방문자 연락처,이름 + 아파트명 조인하기
+
+CREATE VIEW visit_info_view AS
+SELECT
+    v.vidx,
+    a.aptnm AS aptnm,
+    m.mname AS vname,
+    m.mtel AS vtel,
+    v.vdate,
+    v.vtime,
+    v.vcount,
+    v.res_date
+FROM
+    visit_info v
+JOIN
+    apartment_info a ON v.aidx = a.aidx
+JOIN
+    member m ON v.midx = m.midx;
+    
+    
+desc visit_info_view;
+
+select * from visit_info_view;
+select * from visit_info;

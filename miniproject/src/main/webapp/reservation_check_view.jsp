@@ -14,14 +14,14 @@
 			<li><input class="sel_input2" value="${rsvt.vtime}" disabled>* 해당 시간에 맞춰서 방문해
 				주셔야 합니다.</li>
 			<li>방문자명</li>
-			<li><input type="text" value="${rsvt.vname}" class="sel_input" disabled></li>
+			<li><input type="text" value="${sessionScope.dto.mname}" class="sel_input" disabled></li>
 			<li>방문인원</li>
 			<li>${rsvt.vcount}명 ※ 방문인원은 최대 2명까지 입니다.</li>
 			<li>연락처</li>
-			<li><input type="text" value="${rsvt.vtel}" class="sel_input" disabled></li>
+			<li><input type="text" value="${sessionScope.dto.mtel}" class="sel_input" disabled></li>
 		</ul>
 	</div>
 	<div>
-		<input type="button" value="메인페이지로 이동">
+		<input type="button" value="메인페이지로 이동" onclick="location.href='./index.jsp'">
 	</div>
 </section>

@@ -1,5 +1,6 @@
 package miniproject;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,9 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class main_controller {
@@ -38,7 +41,7 @@ public class main_controller {
 
 	@GetMapping("/mdchoice.do")
 	public String mdchoice(Model m) {
-		List<mdchoice_DTO> mcList = this.dao.mdchoice_select();
+		List<mdboard_DTO> mcList = this.dao.mdboard_index();
 		m.addAttribute("mcList", mcList);
 		return null;
 	}
@@ -189,7 +192,7 @@ public class main_controller {
 	public String counselok(
 			@RequestParam(defaultValue="N", required=false) String[] check1, 
 			@RequestParam(defaultValue="N", required=false) String[] check2, 
-			counsel_DTO dto, Model m) {
+			counselview_DTO dto, Model m) {
 		
 		// 오늘 이후의 날짜인지 체크
 		boolean result = new m_isnextday().isnday(dto.getCdate());
@@ -227,15 +230,18 @@ public class main_controller {
 				
 			} catch (Exception e) {
 				msg = "alert('상담신청 실패 : e');" + "history.go(-1);";
+				e.printStackTrace();
 			}
 		}
 		m.addAttribute("msg", msg);
 
 		return "sc";
 	}
+	
+	
 	Map<String, Object> rsvt = null;
 	//분양정보 선택 => idx를 받아 아파트 dto를 Map으로 전달 / 방문예약or완료 
-	@GetMapping("/week_tails.do")
+	@PostMapping("/week_tails.do")
 	public String week_tails(String aidx, String mname, Model m, HttpServletRequest req) {
 		
 		apartment_DTO selapt = this.dao.one_apt_select(aidx);
@@ -246,27 +252,6 @@ public class main_controller {
 			m.addAttribute("msg", msg);
 			return "sc";
 		}else {		//아파트 정보 있을 때 
-			//세션 ㄴㄴ => 쌓이기만해서 버벅거림! 
-//			HttpSession session = req.getSession();
-//			session.setAttribute("oapt", oapt);
-			
-			//맵으로 만들어서 전달해봐야징... String.valueOf()
-			/*
-			Map<String, Object> oapt = new HashMap<String, Object>();
-			oapt.put("aidx", String.valueOf(selapt.getAidx()));
-			oapt.put("aptnm", selapt.getAptnm());
-			oapt.put("addr", selapt.getAddr());
-			oapt.put("apt_type", selapt.getApt_type());
-			oapt.put("rent_type", selapt.getRent_type());
-			oapt.put("sale_date", selapt.getSale_date());
-			oapt.put("move_date", selapt.getMove_date());
-			oapt.put("img", selapt.getImg());
-			oapt.put("heat", selapt.getHeat());
-			oapt.put("units", String.valueOf(selapt.getUnits()));
-			oapt.put("buildings", String.valueOf(selapt.getBuildings()));
-			oapt.put("builder", selapt.getBuilder());
-			oapt.put("reg_date", selapt.getReg_date());
-			*/
 			
 			//dto를 Map으로 바꾸는 모델 사용
 			Map<String, Object> oapt =  new m_dtoToMap().dtm(selapt);
@@ -288,16 +273,20 @@ public class main_controller {
 		return null;
 	}
 	
-	// 모델하우스 사전 방문 예약 페이지로 아파트이름 전달
+	// 모델하우스 사전 방문 예약 페이지로 아파트이름, 인덱스 전달
 	@PostMapping("/reservation.do")
-	public String reservation(String aptnm, Model m) {
+	public String reservation(String aptnm, String aidx, Model m) {
+		System.out.println("rsvt.do");
+		
 		m.addAttribute("aptnm", aptnm);
+		m.addAttribute("aidx", aidx);
 		return null;
 	}
 	
 	// 모델하우스 사전 방문 예약 완료
 	@PostMapping("/reservationok.do")
 	public String reservationok(reservation_DTO rdto, Model m) {
+		
 		// 날짜 체크
 		boolean isntime = new m_isnextday().isndaytime(rdto.getVdate() + rdto.getVtime());
 		String msg = "";
@@ -312,8 +301,11 @@ public class main_controller {
 				msg = "alert('방문 예약 완료');" + "location.href='./index.do';";
 			}
 		}
+		 
 		m.addAttribute("msg", msg);
 		return "sc";
+
+		
 	}
 	
 	//방문 확인 
@@ -329,26 +321,20 @@ public class main_controller {
 			Model m, 
 			@RequestParam(name="search", defaultValue = "", required = false) String search,
 			@RequestParam(name="pageno", defaultValue = "1", required = false) Integer pageno) {
-
-		System.out.println("do실행됨");
 		
 		// 리스트 총개수확인
 		int total = this.dao.mdboard_total();
-
-		System.out.println("total : " + total);
 		
 		// 사용자가 클릭한 페이지 번호에 맞는 순차번호 계산값
 		int userpage = (pageno - 1) * 10;
 		m.addAttribute("userpage", userpage);
 
 		// 검색
-		List<mdboard_DTO> all = null;
+		List<Map<String,Object>> all = null;
 
 
 		if (search.equals("")) { // 연산기호 X, equals
-//			System.out.println("검색어없음");
 			all = this.dao.mdboard_select(pageno); // 사용자가 클릭한 페이지 번호값 전달
-			System.out.println("all : " + all);
 		} else {
 			//검
 //			all = this.dao.banner_search(search);
@@ -361,9 +347,66 @@ public class main_controller {
 		return null;
 	}
 	
+	// 추천분양정보게시물 출력
+	@PostMapping("/md_board_view.do")
+	public String md_board_view(String bidx, Model m) {
+		int result = this.dao.mdboard_viewplus(Integer.parseInt(bidx));
+		Map<String, Object> bmap = this.dao.mdboard_one(Integer.parseInt(bidx));
+		m.addAttribute("bmap", bmap);
+		return null;
+	}
+
+	@Resource(name="m_savefile")
+	m_savefile sf;
 	
-	
-	
-	
+	// 추천분양정보게시물 글쓰기
+	@PostMapping("/writeok.do")
+	public String writeok(mdboard_DTO dto, MultipartFile bfile, HttpServletRequest req, Model m) {
+		
+		String file_new = null;	//저장하기위한 새로운 파일명
+		String msg = "";
+
+		try {
+			if (bfile.getSize() > 0) {
+				String url = req.getServletContext().getRealPath("/upload/");
+				System.out.println(url);
+				
+				file_new = this.sf.rename(bfile.getOriginalFilename());
+				FileCopyUtils.copy(bfile.getBytes(), new File(url + file_new));
+				
+				dto.setFile_url("/upload/" + file_new); // 웹디렉토리경로 및 파일명
+				dto.setFile_new(file_new); // 개발자가 원하는 방식으로 변경한 파일명
+				dto.setFile_ori(bfile.getOriginalFilename()); // 사용자가 적용한 파일명
+				
+				int result = this.dao.mdboard_insert(dto); // 파일 insert
+				msg = "alert('추천분양 정보 게시판 게시물이 추가 되었습니다.');" + "location.href='./md_board.do'";
+				
+			}else {
+				msg = "alert('게시물 추가 실패 : file 없음');" + "history.go(-1);";
+			}
+		}catch (Exception e) {
+			msg = "alert('게시물 추가 실패 : fileIO');" + "history.go(-1);";
+			e.printStackTrace();
+		}
+		
+		m.addAttribute("msg", msg);
+		
+		return "sc";
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

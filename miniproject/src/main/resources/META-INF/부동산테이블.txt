@@ -11,9 +11,22 @@ CREATE TABLE apartment_info (
     units INT NOT NULL COMMENT '세대 수',
     buildings INT NOT NULL COMMENT '건물 동 수',
     builder VARCHAR(100) COMMENT '건설사',
+    state char(10) NOT NULL COMMENT '현황',
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
-    PRIMARY KEY (aidx)
+    PRIMARY KEY (aidx) 
 ) COMMENT='아파트 정보 테이블';
+
+INSERT INTO apartment_info (aptnm, addr, apt_type, rent_type, sale_date, move_date, img, heat, units, buildings, builder, state)
+VALUES
+('LH센트럴힐(공공임대)', '서울시 송파구 문정동 12-2', '아파트', '공공임대', '2025.04', '2027.02', 'room1.jpg', '개별난방,도시가스', 1670, 14, 'GS건설㈜', '오픈'),
+('힐스테이트e편한세상파주', '경기도 파주시 동패동 36-4', '아파트', '민간분양', '2025.06', '2027.09', 'room2.jpg', '지역난방,열병합', 1200, 6, '(주)대광건영', '접수'),
+('청주가경아이파크6단지', '청주시 가경동 64-3', '아파트', '민간분양', '2025.08', '2028.01', 'room3.jpg', '개별난방,도시가스', 600, 4, 'GS건설㈜', '접수'),
+('원봉공원힐데스하임', '청주시 용암동 38-6', '아파트', '민간분양', '2025.12', '2027.11', 'room4.jpg', '개별난방,도시가스', 650, 6, '(주)제일건설', '접수'),
+('청계리버뷰자이(민간분양)', '서울시 성동구 용답동 3가 62-2', '아파트', '민간분양', '2025.07', '2028.05', 'room5.jpg', '개별난방,도시가스', 580, 5, '롯데건설(주)', '접수'),
+('제일풍경채검단IV(AA22)', '세종특별시 서구 원당동 21-4', '아파트', '민간분양', '2025.10', '2026.11', 'room6.jpg', '지역난방,열병합', 800, 3, '(주)세담종합건설', '접수'),
+('소사역롯세캐슬더뉴엘', '부천시 소사본동 2가 23', '아파트', '민간분양', '2025.10', '2027.03', 'room7.jpg', '지역난방,열병합', 1200, 11, '(주)세담종합건설', '접수'),
+('삼익더랩소디', '서울시 강서구 내발산동 3-2', '아파트', '공공임대', '2025.04', '2026.12', 'room8.jpg', '개별난방,도시가스', 800, 7, '현대엔지니어링(주)', '오픈');
+
 
 CREATE TABLE md_choice (
     choice_idx INT AUTO_INCREMENT COMMENT '기본 키',

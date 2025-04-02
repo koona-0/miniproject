@@ -73,3 +73,18 @@
 	border: 0;
 	font-size: 12px;
 }
+
+.board_in1{
+	width:200px;
+	height: 30px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	text-indent: 5px;
+}
+.board_in2{
+	width:450px;
+	height: 30px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	text-indent: 5px;
+}

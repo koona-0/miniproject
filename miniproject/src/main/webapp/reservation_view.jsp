@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 <form id="f" method="post" action="./reservationok.do">
-<input type="hidden" name="aptnm" value="${aptnm}">
+<input type="hidden" name="aidx" value="${aidx}">
+<input type="hidden" name="midx" value="${sessionScope.dto.midx}">
 <section class="sub">
 	<p>모델 하우스 사전 방문예약</p>
 	<div>
