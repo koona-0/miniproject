@@ -31,5 +31,9 @@ public interface index_mapper {
 	public int visit_insert(reservation_DTO dto);
 	
 	public reservation_DTO visit_select(String aptnm, String vname);
+	
+	public List<mdboard_DTO> mdboard_select(Integer pgno);
+	
+	public int mdboard_total();
 
 }

@@ -74,5 +74,15 @@
 		select * from visit_info where aptnm=#{aptnm} and vname=#{vname}
 	</select>
 	
+	<!-- 추천분양정보게시판 전체 + 페이징 select -->
+	<select id="mdboard_select" resultType="mdboarddto" parameterType="Map">
+	select * from md_board order by bidx desc limit #{spage},#{epage}
+	</select>
+
+	<!-- 추천분양정보게시판 게시물 -->
+	<select id="mdboard_total" resultType="int">
+		select count(*) as total from md_board
+	</select>
+	
 </mapper>
 

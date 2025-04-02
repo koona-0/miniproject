@@ -113,5 +113,25 @@ public class index_DAO implements index_mapper {
 		reservation_DTO dto = this.st.selectOne("visit_select", datas);
 		return dto;
 	}
+	
+	Integer page_ea = 10;	//한페이지에 출력할 게시물 수  
+	
+	//추천분양정보게시판 전체 + 페이징 select
+	@Override
+	public List<mdboard_DTO> mdboard_select(Integer pgno) {
+		Map<String,Integer> data = new HashMap<String,Integer>();
+		data.put("spage", this.page_ea * (pgno - 1));	
+		data.put("epage", this.page_ea);	
+		
+		List<mdboard_DTO> all = this.st.selectList("mdboard_select",data);
+		return all;
+	}
+	
+	//추천분양정보게시판 게시물 
+	@Override
+	public int mdboard_total() {
+		int total = this.st.selectOne("mdboard_total");
+		return total;
+	}
 
 }

@@ -1,6 +1,7 @@
 package miniproject;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -315,10 +316,54 @@ public class main_controller {
 		return "sc";
 	}
 	
+	//방문 확인 
 	@GetMapping("/reservation_check.do")
 	public String reservation_check(Model m) {
 		m.addAttribute("rsvt", rsvt);
 		return null;
 	}
+	
+	//추천분양정보게시판 출력
+	@GetMapping("/md_board.do")
+	public String md_board(
+			Model m, 
+			@RequestParam(name="search", defaultValue = "", required = false) String search,
+			@RequestParam(name="pageno", defaultValue = "1", required = false) Integer pageno) {
+
+		System.out.println("do실행됨");
+		
+		// 리스트 총개수확인
+		int total = this.dao.mdboard_total();
+
+		System.out.println("total : " + total);
+		
+		// 사용자가 클릭한 페이지 번호에 맞는 순차번호 계산값
+		int userpage = (pageno - 1) * 10;
+		m.addAttribute("userpage", userpage);
+
+		// 검색
+		List<mdboard_DTO> all = null;
+
+
+		if (search.equals("")) { // 연산기호 X, equals
+//			System.out.println("검색어없음");
+			all = this.dao.mdboard_select(pageno); // 사용자가 클릭한 페이지 번호값 전달
+			System.out.println("all : " + all);
+		} else {
+			//검
+//			all = this.dao.banner_search(search);
+		}
+
+		m.addAttribute("total", total);
+		m.addAttribute("search", search);
+		m.addAttribute("all", all);
+		
+		return null;
+	}
+	
+	
+	
+	
+	
 	
 }
