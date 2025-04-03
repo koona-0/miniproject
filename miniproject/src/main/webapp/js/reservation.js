@@ -12,3 +12,10 @@ var visit_btn = function(){
 		f.submit();
 	}
 }
+
+var delete_btn = function(vidx) {
+	if (confirm("방문예약을 취소 하시겠습니까?")) {		// 사용자가 "확인"을 클릭한 경우
+		delf.vidx.value=vidx;
+		delf.submit();
+	}
+}

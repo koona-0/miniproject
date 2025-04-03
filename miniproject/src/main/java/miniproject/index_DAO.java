@@ -107,11 +107,11 @@ public class index_DAO implements index_mapper {
 	
 	//예약 select
 	@Override
-	public reservation_DTO visit_select(String aptnm, String vname) {
+	public rsvtview_DTO visit_select(String aidx, String midx) {
 		Map<String, String> datas = new HashMap<String, String>();
-		datas.put("aptnm", aptnm);
-		datas.put("vname", vname);
-		reservation_DTO dto = this.st.selectOne("visit_select", datas);
+		datas.put("aidx", aidx);
+		datas.put("midx", midx);
+		rsvtview_DTO dto = this.st.selectOne("visit_select", datas);
 		return dto;
 	}
 	
@@ -126,6 +126,18 @@ public class index_DAO implements index_mapper {
 		
 		List<mdboard_DTO> boardList = this.st.selectList("mdboard_select",data);
 		
+		List<Map<String,Object>> bd = new ArrayList<Map<String,Object>>();
+		for (mdboard_DTO board : boardList) {
+			Map<String,Object> bdata = new m_dtoToMap().dtm(board);
+			bd.add(bdata);
+        }
+		return bd;
+	}
+	
+	//추천분양정보게시판 검색
+	@Override
+	public List<Map<String, Object>> mdboard_search(String search) {
+		List<mdboard_DTO> boardList = this.st.selectList("mdboard_search",search);
 		List<Map<String,Object>> bd = new ArrayList<Map<String,Object>>();
 		for (mdboard_DTO board : boardList) {
 			Map<String,Object> bdata = new m_dtoToMap().dtm(board);
@@ -160,6 +172,26 @@ public class index_DAO implements index_mapper {
 	@Override
 	public int mdboard_insert(mdboard_DTO dto) {
 		int result = this.st.insert("mdboard_insert",dto);	
+		return result;
+	}
+	
+	// 고객별 방문 예약 리스트
+	@Override
+	public List<Map<String, Object>> rsvtlist_select(String midx) {
+		List<rsvtview_DTO> dtol = this.st.selectList("rsvtlist_select", midx);
+		
+		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
+		for (rsvtview_DTO rsvt :dtol) {
+			Map<String,Object> rd = new m_dtoToMap().dtm(rsvt);
+			rlist.add(rd);
+        }
+		return rlist;
+	}
+	
+	// 방문예약취소
+	@Override
+	public int rsvt_delete(String vidx) {
+		int result = this.st.delete("rsvt_delete", vidx);
 		return result;
 	}
 

@@ -55,14 +55,13 @@
 		</ol>
 	</div>
 	
-	<%--
-	<form id="sform" method="get" action="./bannerlist 수정하기">
+	<%-- 검색 form --%>
+	<form id="sform" method="get" action="./md_board.do">
 	<div class="info_search">
-		<input type="text" class="search_text" placeholder="검색어를 입력하세요">
+		<input type="text" name="search" value="${search}" class="search_text" placeholder="검색어를 입력하세요">
 		<input type="button" value="검색" class="search_btn" onclick="spage()">
 	</div>
 	</form>
-	 --%>
 	
 	<%-- 해당 게시물로 이동 --%>
 	<form id="gvform" method="post" action="./md_board_view.do">

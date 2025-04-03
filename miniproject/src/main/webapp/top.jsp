@@ -34,15 +34,27 @@
             </cr:if>
         </ul>
         </span>
-        <span title="모델 하우스 사전예약 리스트" onclick="reserve_page()"><img src="./ico/reserve_list.svg"></span>
+        <span title="모델 하우스 사전예약 리스트" onclick="reserve_page(${sessionScope.dto.midx})"><img src="./ico/reserve_list.svg"></span>
       </li>
     </ul>
   </div>
  </nav>
+ 
+ <form id="rf" method="get" action="reservation_list.do">
+ <input type="hidden" name="midx" value="">
+ </form>
+ 
+ 
  <script>
     //해당 함수는 모델 하우스 사전 방문예약 확인 리스트 페이지로 이동 되도록 합니다.
-    function reserve_page() {
-
+    function reserve_page(midx) {
+    	if(!midx){	//null과 undefined 모두 잡음 
+    		alert('로그인 후 이용가능합니다.');
+    	}else{
+	    	rf.midx.value=midx;
+	    	rf.submit();
+    	}
+    	
     }
     function myinfo_menu(part){
         var log_menu = document.getElementById("login_info");

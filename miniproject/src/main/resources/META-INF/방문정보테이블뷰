@@ -29,6 +29,7 @@ CREATE TABLE visit_info (
 CREATE VIEW visit_info_view AS
 SELECT
     v.vidx,
+    m.midx,
     a.aptnm AS aptnm,
     m.mname AS vname,
     m.mtel AS vtel,

@@ -9,13 +9,13 @@
 		</p>
 		<form id="f" method="post" action="./week_tails.do">
 		<input type="hidden" name="aidx" value="">
-		<input type="hidden" name="midx" value="${sessionScope.dto.midx}">
+		<input type="hidden" name="midx" value="">
 		<input type="hidden" name="mname" value="${sessionScope.dto.mname}">
 		</form>
 		<cr:forEach var="aptdata" items="${aptList}">
 			<div class="week_estates">
 				<ul>
-					<li><a onclick="selapt(${aptdata.aidx})">
+					<li><a onclick="selapt(${aptdata.aidx},${sessionScope.dto.midx})">
 						<span>${aptdata.state}</span>
 							<div>${aptdata.aptnm}</div>
 							<aside>${aptdata.addr}</aside> <span>${aptdata.apt_type} |
@@ -34,8 +34,14 @@
 </section>
 
 <script>
-function selapt(aidx){
-	f.aidx.value=aidx;
-	f.submit();
+function selapt(aidx,midx){
+	if(!midx) {	//로그인 정보가 없을 때 
+		alert('로그인이 필요한 서비스입니다.');
+		location.href='./login.jsp';
+	}else {		//로그인 정보가 있을 때 
+		f.midx.value=midx;
+		f.aidx.value=aidx;
+		f.submit();
+	}
 }
 </script>

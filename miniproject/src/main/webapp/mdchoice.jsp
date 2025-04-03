@@ -3,10 +3,11 @@
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<%-- 해당 게시물로 이동 --%>
 <form id="gvform" method="post" action="./md_board_view.do">
-<input type="hidden" name="bidx" value="">
+	<input type="hidden" name="bidx" value="">
 </form>
-	
+
 <section>
 	<div class="recommend">
 		<p>
@@ -16,24 +17,10 @@
 		<div class="md_estates">
 			<ul>
 				<cr:forEach var="mcdata" items="${mcList}">
-				${mcdata.file_url}<br>
-				<cr:if test="${mcdata.b_url != ''}">
-					<a href="${mcdata.b_url}">
-				</cr:if>
-				
-				<cr:if test="${mcdata.b_url == ''}">
-				<!-- 이게 맞나? 담에 수정하기 -->
-					<a onclick="goboardview(${mcdata.bidx})">
-				</cr:if>
-				
+					<a href="#" onclick="goboardview(${mcdata.bidx})">
 						<li>
 							<div>
-							<cr:if test="${fn:length(mcdata.file_url) < 10}">
-								<img src="./md_room/${mcdata.file_url}">
-							</cr:if>
-							<cr:if test="${fn:length(mcdata.file_url) >= 10}">
-								<img src="./..${mcdata.file_url}">
-							</cr:if>
+								<img src="/miniproject/${mcdata.file_url}">
 							</div> <span>${mcdata.btitle} </span>
 							<div>${mcdata.btext}</div>
 					</li>

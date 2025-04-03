@@ -6,8 +6,10 @@
 	<section class="sub">
 		<div>
 			<ul>
-				<li>이메일 찾기</li>
-				<li>비밀번호 찾기</li>
+				<li onclick="location.href='./email_search.jsp'"
+				style="cursor: pointer;">이메일 찾기</li>
+				<li onclick="location.href='./passwd_search.jsp'"
+				style="cursor: pointer;">비밀번호 찾기</li>
 			</ul>
 		</div>
 		<div class="text1">

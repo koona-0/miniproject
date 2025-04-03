@@ -222,7 +222,7 @@ public class main_controller {
 					String sendok = new m_sendmail().sendok(dto.getMname(), dto.getMemail(), dto.getCtext());
 
 					if (sendok == "OK") { // 메일전송 성공
-						msg = "alert('상담신청 완료');" + "location.href='./index.do';";
+						msg = "alert('담당자가 확인 후 해당 상담일시에 맞춰서 연락 드립니다.');" + "location.href='./index.do';";
 					} else { 		// 메일 전송 실패
 						msg = "alert('상담신청 실패 : mail');" + "history.go(-1);";
 					}
@@ -242,34 +242,33 @@ public class main_controller {
 	Map<String, Object> rsvt = null;
 	//분양정보 선택 => idx를 받아 아파트 dto를 Map으로 전달 / 방문예약or완료 
 	@PostMapping("/week_tails.do")
-	public String week_tails(String aidx, String mname, Model m, HttpServletRequest req) {
-		
-		apartment_DTO selapt = this.dao.one_apt_select(aidx);
+	public String week_tails(String aidx, String midx, Model m, HttpServletRequest req) {
 		String msg = null;
 		
-		if(selapt == null) {	//아파트 정보 없을 때 
-			msg = "alert('잘못된 접근입니다.');" + "history.go(-1);";
-			m.addAttribute("msg", msg);
-			return "sc";
-		}else {		//아파트 정보 있을 때 
+			//선택한 아파트 DTO 가져오기
+			apartment_DTO selapt = this.dao.one_apt_select(aidx);
 			
-			//dto를 Map으로 바꾸는 모델 사용
-			Map<String, Object> oapt =  new m_dtoToMap().dtm(selapt);
-			m.addAttribute("oapt", oapt);
-			
-			//예약 있는가?
-			reservation_DTO rdto = this.dao.visit_select(selapt.getAptnm(), mname);
-			
-			boolean isres = false; // 예약 있을때 isres = true
-			if (rdto == null) {
-			} else {
-				isres = true;
-				this.rsvt = new m_dtoToMap().dtm(rdto);
-				m.addAttribute("rsvt", this.rsvt);
+			if(selapt == null) {	//아파트 정보 없을 때 
+				msg = "alert('잘못된 접근입니다.');" + "history.go(-1);";
+				m.addAttribute("msg", msg);
+				return "sc";
+			}else {		//아파트 정보 있을 때 
+				Map<String, Object> oapt =  new m_dtoToMap().dtm(selapt);	//dto를 Map으로 바꾸는 모델 사용
+				m.addAttribute("oapt", oapt);
+				
+				//예약 있는지 확인
+				rsvtview_DTO rdto = this.dao.visit_select(aidx, midx);
+				boolean isres = false; // 예약 있을때 isres = true
+				if (rdto != null) {		// 예약있을때 
+					isres = true;
+					this.rsvt = new m_dtoToMap().dtm(rdto);
+					m.addAttribute("rsvt", this.rsvt);
+				}
+				m.addAttribute("isres", isres);
 			}
-			m.addAttribute("isres", isres);
 			
-		}
+		
+		
 		return null;
 	}
 	
@@ -331,13 +330,12 @@ public class main_controller {
 
 		// 검색
 		List<Map<String,Object>> all = null;
-
-
 		if (search.equals("")) { // 연산기호 X, equals
+			//검색아닐때 
 			all = this.dao.mdboard_select(pageno); // 사용자가 클릭한 페이지 번호값 전달
 		} else {
-			//검
-//			all = this.dao.banner_search(search);
+			//검색일때 
+			all = this.dao.mdboard_search(search);
 		}
 
 		m.addAttribute("total", total);
@@ -394,6 +392,37 @@ public class main_controller {
 		return "sc";
 	}
 	
+	// 고객별 방문 예약 리스트
+	@GetMapping("/reservation_list.do")
+	public String reservation_list(String midx, Model m) {
+		List<Map<String,Object>> rlist = this.dao.rsvtlist_select(midx);
+//		System.out.println(rlist.get(0).get("cnt"));
+		m.addAttribute("rlist", rlist);
+		
+		return null;
+	}
+
+	//방문 예약 취소 
+	@GetMapping("/rsvtdelok.do")
+	public String rsvtdelok(String vidx, String midx, Model m) {
+		String msg = "";
+		
+		if(vidx.equals("")) {
+			msg = "alert('올바른 접근이 아닙니다.'); history.go(-1);";
+		}else {
+			int result = this.dao.rsvt_delete(vidx);
+			
+			if(result > 0) {	//삭제 성공 
+				msg = "alert('방문 예약 취소가 완료되었습니다.'); "
+						+ "location.href='./reservation_list.do?midx="+midx+"';";	
+			}else {	//삭제 실패 
+				msg = "alert('삭제 실패 : result0'); history.go(-1);";	
+			}
+		}
+		m.addAttribute("msg", msg);
+		
+		return "sc";
+	}
 }
 
 

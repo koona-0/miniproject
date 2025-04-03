@@ -22,25 +22,31 @@ public interface index_mapper {
 	public String esearch_select(member_DTO dto);
 
 	public String pwsearch_select(String memail, String mtel);
-	
+
 	public int pw_update(String mpw, String memail);
-	
+
 	public apartment_DTO one_apt_select(String aidx);
-	
+
 	public int counsel_insert(counselview_DTO dto);
-	
+
 	public int visit_insert(reservation_DTO dto);
-	
-	public reservation_DTO visit_select(String aptnm, String vname);
-	
-	public List<Map<String,Object>> mdboard_select(Integer pgno);
-	
+
+	public rsvtview_DTO visit_select(String aidx, String midx);
+
+	public List<Map<String, Object>> mdboard_select(Integer pgno);
+
+	public List<Map<String, Object>> mdboard_search(String search);
+
 	public int mdboard_total();
-	
-	public Map<String,Object> mdboard_one(int bidx);
-	
+
+	public Map<String, Object> mdboard_one(int bidx);
+
 	public int mdboard_viewplus(int bidx);
-	
+
 	public int mdboard_insert(mdboard_DTO dto);
+
+	public List<Map<String, Object>> rsvtlist_select(String midx);
+
+	public int rsvt_delete(String vidx);
 
 }

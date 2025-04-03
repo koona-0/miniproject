@@ -31,7 +31,7 @@ CREATE TABLE counsel_mails (
 CREATE VIEW counsel_mails_view AS
 SELECT
     cm.cidx,
-    cm.midx,
+    m.midx,
     m.mname AS mname,
     m.memail AS memail,
     m.mtel AS mtel,

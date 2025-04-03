@@ -5,6 +5,7 @@
 <form id="vform" method="post" action="./reservation.do">
 <input type="hidden" name="aptnm" value="${oapt.aptnm}">
 <input type="hidden" name="aidx" value="${oapt.aidx}">
+<input type="hidden" name="midx" value="${sessionScope.dto.midx}">
 </form>
 
 <div class="weektails">
