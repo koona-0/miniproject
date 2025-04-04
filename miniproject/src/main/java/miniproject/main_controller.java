@@ -360,9 +360,14 @@ public class main_controller {
 	// 추천분양정보게시물 글쓰기
 	@PostMapping("/writeok.do")
 	public String writeok(mdboard_DTO dto, MultipartFile bfile, HttpServletRequest req, Model m) {
-		
 		String file_new = null;	//저장하기위한 새로운 파일명
 		String msg = "";
+
+		//파일크기 2MB 이상일시 뒤로가기 
+		if (bfile.getSize() > 2097152) {
+			msg = "alert('파일의 크기는 2MB이하로 첨부해주세요');" + "history.go(-1);";
+		}
+		
 
 		try {
 			if (bfile.getSize() > 0) {
@@ -393,7 +398,7 @@ public class main_controller {
 	}
 	
 	// 고객별 방문 예약 리스트
-	@GetMapping("/reservation_list.do")
+	@PostMapping("/reservation_list.do")
 	public String reservation_list(String midx, Model m) {
 		List<Map<String,Object>> rlist = this.dao.rsvtlist_select(midx);
 //		System.out.println(rlist.get(0).get("cnt"));
@@ -401,9 +406,9 @@ public class main_controller {
 		
 		return null;
 	}
-
+	
 	//방문 예약 취소 
-	@GetMapping("/rsvtdelok.do")
+	@PostMapping("/rsvtdelok.do")
 	public String rsvtdelok(String vidx, String midx, Model m) {
 		String msg = "";
 		
@@ -413,15 +418,15 @@ public class main_controller {
 			int result = this.dao.rsvt_delete(vidx);
 			
 			if(result > 0) {	//삭제 성공 
-				msg = "alert('방문 예약 취소가 완료되었습니다.'); "
-						+ "location.href='./reservation_list.do?midx="+midx+"';";	
+				msg = "alert('방문 예약 취소가 완료되었습니다.'); ";	
+				this.reservation_list(midx, m);
 			}else {	//삭제 실패 
 				msg = "alert('삭제 실패 : result0'); history.go(-1);";	
 			}
 		}
 		m.addAttribute("msg", msg);
 		
-		return "sc";
+		return "reservation_list";
 	}
 }
 

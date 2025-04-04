@@ -16,7 +16,7 @@
 			<li>일반매물</li>
 			<li onclick="location.href='./md_board.do'">추천매물</li>
 			<li>중계의뢰</li>
-			<li onclick="location.href='./counsel.jsp'">상담신청</li>
+			<li onclick="is_loginc(${sessionScope.dto.midx})">상담신청</li>
 			<li>업체의뢰</li>
 			<li>의뢰현황</li>
 			
@@ -40,12 +40,25 @@
   </div>
  </nav>
  
- <form id="rf" method="get" action="reservation_list.do">
+ <form id="rf" method="post" action="reservation_list.do">
  <input type="hidden" name="midx" value="">
  </form>
  
  
  <script>
+ //상담신청 클릭시 로그인 확인
+ function is_loginc(midx){
+	if(!midx) {	//로그인 정보가 없을 때 
+		alert('로그인이 필요한 서비스입니다.');
+		location.href='./login.jsp';
+	}else {		//로그인 정보가 있을 때 
+		f.midx.value=midx;
+		location.href='./counsel.jsp'
+		
+	}
+}
+ 
+ 
     //해당 함수는 모델 하우스 사전 방문예약 확인 리스트 페이지로 이동 되도록 합니다.
     function reserve_page(midx) {
     	if(!midx){	//null과 undefined 모두 잡음 

@@ -178,8 +178,23 @@ public class index_DAO implements index_mapper {
 	// 고객별 방문 예약 리스트
 	@Override
 	public List<Map<String, Object>> rsvtlist_select(String midx) {
+		
+		//방문예약리스트 가져오기
 		List<rsvtview_DTO> dtol = this.st.selectList("rsvtlist_select", midx);
 		
+		//예약 시간 지나면 삭제
+		for(rsvtview_DTO rsvt : dtol) {
+			String dt = rsvt.getVdate()+rsvt.getVtime();
+			boolean isn = new m_isnextday().isndaytime(dt);
+			if(isn==false) {
+				int result = this.st.delete("rsvt_delete", rsvt.getVidx());
+			}
+		}
+		
+		//삭제된 DB에서 다시 리스트 가져오기 
+		dtol = this.st.selectList("rsvtlist_select", midx);
+		
+		//최종 리스트 맵으로 만들기 
 		List<Map<String,Object>> rlist = new ArrayList<Map<String,Object>>();
 		for (rsvtview_DTO rsvt :dtol) {
 			Map<String,Object> rd = new m_dtoToMap().dtm(rsvt);

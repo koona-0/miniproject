@@ -5,8 +5,7 @@
 
 	<!-- index 페이지 -->
 	<select id="apartment_select" resultType="apartmentdto">
-		select * from
-		apartment_info order by aidx desc
+		select * from apartment_info order by aidx desc LIMIT 0, 8
 	</select>
 
 	<select id="mdboard_index" resultType="mdboarddto">

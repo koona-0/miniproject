@@ -75,5 +75,3 @@ var updatepw_btn = function() {
 }
 
 
-
-

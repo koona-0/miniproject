@@ -3,10 +3,14 @@
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%-- 삭제폼 --%>
-<form id="delf" method="get" action="./rsvtdelok.do">
+<form id="delf" method="post" action="./rsvtdelok.do">
 <input type="hidden" name="midx" value="${sessionScope.dto.midx}">
 <input type="hidden" name="vidx" value="">
 </form>
+
+<script>
+${msg}
+</script>
 
 <section class="sub">
 	<p>모델 하우스 방문 예약 리스트</p>
