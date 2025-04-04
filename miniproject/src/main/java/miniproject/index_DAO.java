@@ -187,7 +187,11 @@ public class index_DAO implements index_mapper {
 			String dt = rsvt.getVdate()+rsvt.getVtime();
 			boolean isn = new m_isnextday().isndaytime(dt);
 			if(isn==false) {
+				try {					
 				int result = this.st.delete("rsvt_delete", rsvt.getVidx());
+				}catch(Exception e) {
+					continue;
+				}
 			}
 		}
 		

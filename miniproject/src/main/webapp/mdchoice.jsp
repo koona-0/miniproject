@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@page import="java.util.Date"%>
+<%Date date = new Date();%>
 <%-- 해당 게시물로 이동 --%>
 <form id="gvform" method="post" action="./md_board_view.do">
 	<input type="hidden" name="bidx" value="">
@@ -32,4 +33,4 @@
 	</div>
 </section>
 
-<script src="./js/board.js?v=2"></script>
+<script src="./js/board.js?v=<%=date%>"></script>

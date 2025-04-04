@@ -40,19 +40,18 @@
   </div>
  </nav>
  
- <form id="rf" method="post" action="reservation_list.do">
+ <form id="rf" method="post" action="reservation_list.do" style="height:0px !important;">
  <input type="hidden" name="midx" value="">
  </form>
- 
- 
- <script>
+
+
+<script>
  //상담신청 클릭시 로그인 확인
  function is_loginc(midx){
 	if(!midx) {	//로그인 정보가 없을 때 
 		alert('로그인이 필요한 서비스입니다.');
 		location.href='./login.jsp';
 	}else {		//로그인 정보가 있을 때 
-		f.midx.value=midx;
 		location.href='./counsel.jsp'
 		
 	}

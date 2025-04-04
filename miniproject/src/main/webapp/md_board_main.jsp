@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@page import="java.util.Date"%>
+<%Date date = new Date();%>
 
 
 
@@ -29,10 +30,10 @@
 		<cr:forEach var="item" items="${all}" varStatus="idx">
 		<ul class="data_view" onclick="goboardview(${item.bidx})">
 			<li>${ino - idx.index}</li>
-			<cr:if test="${fn:length(item.btitle) > 20 || fn:contains(item.btitle, '<br>')}">
-			<li style="text-align: left;" title="${item.btitle}"> ${fn:substring(fn:replace(item.btitle, "<br>", " "), 0, 20)}...</li>
+			<cr:if test="${fn:length(item.btitle) > 30 || fn:contains(item.btitle, '<br>')}">
+			<li style="text-align: left;" title="${item.btitle}"> ${fn:substring(fn:replace(item.btitle, "<br>", " "), 0, 30)}...</li>
 			</cr:if>
-			<cr:if test="${fn:length(item.btitle) <= 20 && !fn:contains(item.btitle, '<br>')}">
+			<cr:if test="${fn:length(item.btitle) <= 30 && !fn:contains(item.btitle, '<br>')}">
 			<li style="text-align: left;" title="${item.btitle}"> ${item.btitle} </li>
 			</cr:if>
 			
@@ -43,8 +44,7 @@
 		</cr:forEach>
 	</div>
 	
-	<%--
-	 --%>
+	<%-- 페이징 --%>
 	<cr:set var="pageidx" value="${param.total / 10 + (1-((param.total / 10) % 1)) % 1}"/>
 	
 	<div class="info_pageing">
@@ -70,4 +70,4 @@
 	
 </section>
 
-<script src="./js/board.js?v=2"></script>
+<script src="./js/board.js?v=<%=date%>"></script>

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.Date"%>
+<%Date date = new Date();%>
+
 <form id="f" method="post" action="./reservationok.do">
 <input type="hidden" name="aidx" value="${aidx}">
 <input type="hidden" name="midx" value="${sessionScope.dto.midx}">
@@ -37,4 +40,4 @@
 	</div>
 </section>
 </form>
-<script src="./js/reservation.js?v=1"></script>
+<script src="./js/reservation.js?v=<%=date%>"></script>

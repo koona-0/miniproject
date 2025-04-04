@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.Date"%>
+<%Date date = new Date();%>
 
 <%-- 삭제폼 --%>
 <form id="delf" method="post" action="./rsvtdelok.do">
@@ -44,5 +46,5 @@ ${msg}
 	</div>
 </section>
 
-<script src="./js/reservation.js?v=2">
+<script src="./js/reservation.js?v=<%=date%>">
 </script>

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.Date"%>
+<%Date date = new Date();%>
+
 <form id="f" method="post" action="./pwsearch_ok.do">
 <section class="sub">
 	<div>
@@ -25,4 +28,4 @@
 </section>
 </form>
 
-<script src="./js/login.js?v=3"></script>
+<script src="./js/login.js?v=<%=date%>"></script>

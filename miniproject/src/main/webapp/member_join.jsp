@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="cr" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.Date"%>
+<%Date date = new Date();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="./css/index.css?v=1">
-<link rel="stylesheet" type="text/css" href="./css/member_join.css?v=1">
+<link rel="stylesheet" type="text/css" href="./css/index.css?v=<%=date%>">
+<link rel="stylesheet" type="text/css" href="./css/member_join.css?v=<%=date%>">
 <style>
 .box {
 	width: 800px;
@@ -31,5 +33,5 @@
 	</footer>
 
 </body>
-<script src="./js/join.js?v=1"></script>
+<script src="./js/join.js?v=<%=date%>"></script>
 </html>
