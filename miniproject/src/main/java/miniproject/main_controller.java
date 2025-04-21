@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +26,7 @@ public class main_controller {
 
 	@Resource(name = "index_DAO")
 	private index_DAO dao;
-
+	
 	/* index 페이지 */
 	@GetMapping("/index.do")
 	public String index(Model m) {
@@ -63,6 +64,10 @@ public class main_controller {
 
 		// 암호화
 		dto.setMpw(new m_md5().md5_code(dto.getMpw()));
+		
+		if(dto.getMcode().equals("2")) {
+			dto.setMcode("1");
+		}
 
 		// 넘어온 회원 정보 DB에 넣기
 		int result = this.dao.member_insert(dto);
@@ -104,27 +109,57 @@ public class main_controller {
 	}
 
 	/* 로그인 페이지 */
-	@PostMapping("/loginok.do")
+	@RequestMapping("/loginok.do")
 	public String loginok(member_DTO ldto, Model m, HttpServletRequest req) throws Exception {
-		//로그인 비번 암호화 
-		ldto.setMpw(new m_md5().md5_code(ldto.getMpw()));
-		
-		//DB랑 비교 => 있으면 DTO에 넣기
-		member_DTO sdto = this.dao.login_select(ldto);
 		
 		String msg = "";
-		if(sdto == null) {	//로그인 실패 
-			System.out.println("로그인 실패");
-			msg = "alert('아이디 또는 패스워드가 다릅니다');" + "history.go(-1);";
-		}else {		//로그인 성공 
-			//세션 생성 
-			HttpSession session = req.getSession();
-			session.setAttribute("dto", sdto);
+		HttpSession session = null;
+		
+		if (ldto.getMcode().equals("1")) { // 일반 로그인 처리
+			//로그인 비번 암호화 
+			ldto.setMpw(new m_md5().md5_code(ldto.getMpw()));
 			
-			//메인으로 이동 
-			msg = "location.href='./index.do';";
+			//DB랑 비교 => 있으면 DTO에 넣기
+			member_DTO sdto = this.dao.login_select(ldto);
+			
+			if(sdto == null) {	//로그인 실패 
+				System.out.println("로그인 실패");
+				msg = "alert('아이디 또는 패스워드가 다릅니다');" + "history.go(-1);";
+			}else {		//로그인 성공 
+				//세션 생성 
+				session = req.getSession();
+				session.setAttribute("dto", sdto);
+				
+				//메인으로 이동 
+				msg = "location.href='./index.do';";
+			}
+			m.addAttribute("msg", msg);
+			
+		} else if(ldto.getMcode().equals("2")) {	//카카오 첫 로그인 처리
+			ldto.setMemail(ldto.getKakao_id());
+			ldto.setMpw(new m_md5().md5_code(ldto.getKakao_id()));
+			member_DTO sdto = this.dao.login_select(ldto);
+			
+			if(sdto == null) {	//로그인 실패 
+				// sessionStorage를 이용하여 간편회원가입을 등록하려함
+				// 단 닉네임일 경우 특수문자를 사용할 수있으므로 생성시 ''로 변수값을 적용하여 처리
+				msg = "alert('카카오 사용자로 로그인시 간편회원가입이 필요합니다.');"
+						+ "sessionStorage.setItem('memail','"+ ldto.getKakao_id() +"');"
+						+ "location.href='./member_join.jsp';";
+			}else {		//로그인 성공 
+				//세션 생성 
+				session = req.getSession();
+				session.setAttribute("dto", sdto);
+				
+				//메인으로 이동 
+				msg = "location.href='./index.do';";
+			}
+			
+			m.addAttribute("msg", msg);
+			
+		} else {	//잘못된 로그인 코드
+			msg = "alert('잘못된 접근입니다.');" + "history.go(-1);";
 		}
-		m.addAttribute("msg", msg);
 		
 		return "sc";
 	}

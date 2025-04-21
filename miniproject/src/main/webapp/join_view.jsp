@@ -4,33 +4,31 @@
 
 
 <form id="f" method="post" action="./joinok.do">
-<!-- 이메일 체크 여부 Y, N -->	
-<input type="hidden" id="emailck" value="N">
+<input type="hidden" id="emailck" value="N">	<!-- 이메일 체크 여부 Y, N -->	
+<input type="hidden" name="mcode" value="1">	<!-- 1 : 자회사회원가입 / 2 : 카카오 -->
+<input type="hidden" name="mjoin" value="WEB">	<!-- WEB, KAKAO -->
 	<p>이메일로 회원가입</p>
 	<div>
-		<a>이메일</a> <input type="text" name="memail"
-			placeholder=" 이메일 주소를 입력해주세요." autocomplete="none"
-			style="width: 400px; float: left;"> <input type="button"
-			value="중복체크" class="mail_btn" onclick="duplcheck()">
+		<a>이메일</a> 
+		<input type="text" name="memail" placeholder=" 이메일 주소를 입력해주세요." autocomplete="none" style="width: 400px; float: left;"> 
+		<input type="button" value="중복체크" class="mail_btn" onclick="duplcheck()">
 	</div>
 	<div>
-		<a>비밀번호</a> <input type="password" name="mpw"
-			placeholder=" 10~16자(영문,숫자,특수 문자 조합)로 입력해주세요." autocomplete="none" maxlength="16">
+		<a>비밀번호</a> 
+		<input type="password" name="mpw" placeholder=" 10~16자(영문,숫자,특수 문자 조합)로 입력해주세요." autocomplete="none" maxlength="16">
 	</div>
 	<div>
-		<a>비밀번호 확인</a> <input type="password" name="mpw2"
-			placeholder=" 비밀번호를 다시 한 번 입력해주세요." autocomplete="none" maxlength="16">
+		<a>비밀번호 확인</a> 
+		<input type="password" name="mpw2" placeholder=" 비밀번호를 다시 한 번 입력해주세요." autocomplete="none" maxlength="16">
 	</div>
 	<div>
-		<a>이름</a> <input type="text" placeholder=" 이름을 입력해주세요." name="mname"
-			autocomplete="none">
+		<a>이름</a> 
+		<input type="text" placeholder=" 이름을 입력해주세요." name="mname" autocomplete="none">
 	</div>
 	<div>
-		<a>휴대폰번호</a> <input type="text" placeholder=" -없이 숫자만 입력해주세요."
-			name="mtel" autocomplete="none" maxlength="11">
+		<a>휴대폰번호</a> 
+		<input type="text" placeholder=" -없이 숫자만 입력해주세요." name="mtel" autocomplete="none" maxlength="11">
 	</div>
-	
-	
 	
 	<!-- 약관 동의 -->
 	<div>
@@ -68,3 +66,6 @@
 </form>
 
 <script src="./js/join.js?v=6"></script>
+<script>
+
+</script>

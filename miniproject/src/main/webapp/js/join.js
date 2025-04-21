@@ -1,6 +1,27 @@
 var tel_regp = /^01\d{8,9}/g;	//휴대폰번호 정규식 코드 
 var mail_regp = /^[a-z0-9.-_]+@[a-z0-9ㄱ-힇]+\.[a-z0-9ㄱ-힇]{2,}/i;	//이메일 정규식 코드
 
+window.onload = function() {
+	let me = sessionStorage.getItem("memail");
+	if(me != null){
+		f.emailck.value = "Y";	//이메일 중복체크 확인 
+		//이메일 중복체크버튼 비활성화 
+		//	document.getElementsByClassName("mail_btn")[0].style.display = "none";	//css깨짐 아래로 대체 	
+		document.getElementsByClassName("mail_btn")[0].style.visibility = "hidden";
+		document.getElementsByClassName("mail_btn")[0].disabled = true;
+
+		f.mcode.value = "2";
+		f.mjoin.value = "KAKAO";
+		f.memail.value = me;
+		f.memail.readOnly = true;
+		f.mpw.value = me;
+		f.mpw.readOnly = true;
+		f.mpw2.value = me;
+		f.mpw2.readOnly = true;
+	}
+}
+
+
 //유효성, 패스워드 확인, submit
 function join_btn() {
 	if (f.memail.value == "" || f.emailck.value != "Y") {
@@ -18,7 +39,7 @@ function join_btn() {
 	} else if (f.mpw.value.length < 10) {
 		alert("비밀번호 확인을 10자 이상 입력하세요.");
 		f.mpw2.focus();
-	} else if(f.mpw.value != f.mpw2.value){
+	} else if (f.mpw.value != f.mpw2.value) {
 		alert("패스워드가 다릅니다.");
 		f.mpw2.focus();
 	} else if (f.mname.value == "") {
@@ -42,7 +63,7 @@ function duplcheck() {
 	if (f.memail.value == "") {
 		alert("이메일을 입력해주세요.");
 		f.memail.focus();
-	}else if(!mail_regp.test(f.memail.value)){
+	} else if (!mail_regp.test(f.memail.value)) {
 		alert("이메일을 형식에 맞게 입력해주세요.");
 		f.memail.focus();
 	} else {
@@ -84,17 +105,17 @@ function ajaxpost(data) {
 
 //약관 출력
 window.onload = function() {
-  var http = new XMLHttpRequest() // Ajax 객체 생성
+	var http = new XMLHttpRequest() // Ajax 객체 생성
 
-  // 첫 번째 약관 파일 로드
-  http.open("GET", "./agree/agree1.txt", false)
-  http.send()
-  document.getElementById("ag").innerHTML = http.response
+	// 첫 번째 약관 파일 로드
+	http.open("GET", "./agree/agree1.txt", false)
+	http.send()
+	document.getElementById("ag").innerHTML = http.response
 
-  // 두 번째 약관 파일 로드
-  http.open("GET", "./agree/agree2.txt", false)
-  http.send()
-  document.getElementById("ag2").innerHTML = http.response
+	// 두 번째 약관 파일 로드
+	http.open("GET", "./agree/agree2.txt", false)
+	http.send()
+	document.getElementById("ag2").innerHTML = http.response
 }
 
 //전체선택 누르면 모두 상태 변경

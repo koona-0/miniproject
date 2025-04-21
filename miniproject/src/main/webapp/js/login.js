@@ -17,6 +17,7 @@ var login_btn = function() {
 	}
 }
 
+
 //이메일 찾기 버튼
 var email_search_btn = function() {
 	if (f.mname.value == "") {
@@ -66,7 +67,7 @@ var updatepw_btn = function() {
 	} else if (f.mpw.value.length < 10) {
 		alert("비밀번호 확인을 10자 이상 입력하세요.");
 		f.mpw2.focus();
-	} else if(f.mpw.value != f.mpw2.value){
+	} else if (f.mpw.value != f.mpw2.value) {
 		alert("패스워드가 다릅니다.");
 		f.mpw2.focus();
 	} else {

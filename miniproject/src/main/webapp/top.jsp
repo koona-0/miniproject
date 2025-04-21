@@ -25,7 +25,7 @@
         <img src="./ico/login.svg">
         <ul class="login_info" id="login_info">
           <cr:if test="${empty sessionScope.dto.mname}">
-            <li style="block">
+            <li style="none">
             <span onclick="location.href='./login.jsp'">로그인</span> / <span onclick="location.href='./member_join.jsp'">회원가입</span> 
             </li>
           </cr:if>

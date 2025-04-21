@@ -18,9 +18,9 @@
 
 	<!-- 회원가입 -->
 	<insert id="member_insert">
-		insert into member (midx, memail, mpw, mname, mtel, over14_agree,
+		insert into member (midx, memail, mpw, mname, mtel, mcode, mjoin, over14_agree,
 		terms_agree, privacy_agree, marketing_agree, join_date)
-		values ('0', #{memail}, #{mpw}, #{mname}, #{mtel}, #{over14_agree},
+		values ('0', #{memail}, #{mpw}, #{mname}, #{mtel}, #{mcode}, #{mjoin}, #{over14_agree},
 		#{terms_agree}, #{privacy_agree}, #{marketing_agree}, now())
 	</insert>
 
